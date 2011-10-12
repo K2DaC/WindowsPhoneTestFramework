@@ -1,0 +1,17 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="binding1_IPhoneAutomationService" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost:8085/phoneAutomation/automate"
+                binding="basicHttpBinding" bindingConfiguration="binding1_IPhoneAutomationService"
+                contract="Remote.IPhoneAutomationService" name="binding1_IPhoneAutomationService" />
+        </client>
+    </system.serviceModel>
+</configuration>

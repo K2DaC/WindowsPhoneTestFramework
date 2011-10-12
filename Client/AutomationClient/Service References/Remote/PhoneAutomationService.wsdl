@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PhoneAutomationService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8085/phoneAutomation?xsd=xsd4" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8085/phoneAutomation?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8085/phoneAutomation?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationController.Commands" />
+      <xsd:import schemaLocation="http://localhost:8085/phoneAutomation?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationController.Interfaces" />
+      <xsd:import schemaLocation="http://localhost:8085/phoneAutomation?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationController.Results" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IPhoneAutomationService_GetNextCommand_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNextCommand" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneAutomationService_GetNextCommand_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNextCommandResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneAutomationService_ContinueProcessing_InputMessage">
+    <wsdl:part name="parameters" element="tns:ContinueProcessing" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneAutomationService_ContinueProcessing_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ContinueProcessingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneAutomationService_SubmitResult_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitResult" />
+  </wsdl:message>
+  <wsdl:message name="IPhoneAutomationService_SubmitResult_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitResultResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IPhoneAutomationService">
+    <wsdl:operation name="GetNextCommand">
+      <wsdl:input wsam:Action="http://tempuri.org/IPhoneAutomationService/GetNextCommand" message="tns:IPhoneAutomationService_GetNextCommand_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IPhoneAutomationService/GetNextCommandResponse" message="tns:IPhoneAutomationService_GetNextCommand_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ContinueProcessing">
+      <wsdl:input wsam:Action="http://tempuri.org/IPhoneAutomationService/ContinueProcessing" message="tns:IPhoneAutomationService_ContinueProcessing_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IPhoneAutomationService/ContinueProcessingResponse" message="tns:IPhoneAutomationService_ContinueProcessing_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitResult">
+      <wsdl:input wsam:Action="http://tempuri.org/IPhoneAutomationService/SubmitResult" message="tns:IPhoneAutomationService_SubmitResult_InputMessage" />
+      <wsdl:output wsam:Action="http://tempuri.org/IPhoneAutomationService/SubmitResultResponse" message="tns:IPhoneAutomationService_SubmitResult_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="binding1_IPhoneAutomationService" type="tns:IPhoneAutomationService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetNextCommand">
+      <soap:operation soapAction="http://tempuri.org/IPhoneAutomationService/GetNextCommand" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ContinueProcessing">
+      <soap:operation soapAction="http://tempuri.org/IPhoneAutomationService/ContinueProcessing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitResult">
+      <soap:operation soapAction="http://tempuri.org/IPhoneAutomationService/SubmitResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PhoneAutomationService">
+    <wsdl:port name="binding1_IPhoneAutomationService" binding="tns:binding1_IPhoneAutomationService">
+      <soap:address location="http://localhost:8085/phoneAutomation/automate" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

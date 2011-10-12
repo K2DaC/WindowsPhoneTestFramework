@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{74791D2D-5C3E-465A-BFF1-A13F83BAC4B3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WindowsPhoneTestFramework.AutomationController</RootNamespace>
+    <AssemblyName>WindowsPhoneTestFramework.AutomationController</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\AutomationElementCommandBase.cs" />
+    <Compile Include="Commands\SetFocusCommand.cs" />
+    <Compile Include="Commands\GetPositionCommand.cs" />
+    <Compile Include="Commands\SetTextCommand.cs" />
+    <Compile Include="Interfaces\AutomationIdentification.cs" />
+    <Compile Include="Results\PositionResult.cs" />
+    <Compile Include="ServiceHostController.cs" />
+    <Compile Include="Commands\ClickCommand.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\ConfirmAliveCommand.cs" />
+    <Compile Include="Commands\GenericCommand.cs" />
+    <Compile Include="Commands\GetTextCommand.cs" />
+    <Compile Include="Commands\LookForTextCommand.cs" />
+    <Compile Include="Commands\NullCommand.cs" />
+    <Compile Include="Commands\TakePictureCommand.cs" />
+    <Compile Include="Interfaces\Constants.cs" />
+    <Compile Include="Interfaces\IPhoneAutomationServiceControl.cs" />
+    <Compile Include="Interfaces\IPhoneAutomationController.cs" />
+    <Compile Include="Interfaces\AutomationIdentifier.cs" />
+    <Compile Include="PhoneAutomationController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\ActionFailedResult.cs" />
+    <Compile Include="Results\ExceptionFailedResult.cs" />
+    <Compile Include="Results\FailedResultBase.cs" />
+    <Compile Include="Results\NotFoundFailedResult.cs" />
+    <Compile Include="Results\PictureResult.cs" />
+    <Compile Include="Results\ResultBase.cs" />
+    <Compile Include="Results\SuccessResult.cs" />
+    <Compile Include="Results\TimeoutFailedResult.cs" />
+    <Compile Include="Service\IPhoneAutomationService.cs" />
+    <Compile Include="Service\PhoneAutomationService.cs" />
+    <Compile Include="Utils\KnownTypeProvider.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{4C0765F2-A904-4E2E-8FFA-9DE0AA461804}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
