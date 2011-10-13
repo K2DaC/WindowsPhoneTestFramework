@@ -78,7 +78,7 @@ namespace WindowsPhoneTestFramework.EmuDriver
             if (!topMostResult)
                 throw new ManipulationFailedException("Failed to bring emulator skin window to topMost");
 
-            var result = NativeMethods.EnsureWindowIsInForeground(EmulatorProcessName);
+            var result = NativeMethods.EnsureWindowIsInForeground(EmulatorWindowClassName, EmulatorWindowWindowName);
             if (!result)
                 throw new ManipulationFailedException("Failed to bring emulator window to foreground");
 
