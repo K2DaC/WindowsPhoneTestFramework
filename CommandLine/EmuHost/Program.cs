@@ -90,7 +90,8 @@ namespace WindowsPhoneTestFramework.EmuHost
 
             var driverCommands = new DriverCommands()
                                      {
-                                         Driver = _emuAutomationController.Driver
+                                         Driver = _emuAutomationController.Driver,
+                                         CommandLine = _commandLine
                                      };
             AddCommands(driverCommands);
 
