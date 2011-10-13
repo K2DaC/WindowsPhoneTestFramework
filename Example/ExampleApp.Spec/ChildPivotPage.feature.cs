@@ -31,8 +31,8 @@ namespace ExampleApp.Spec
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ChildPage", "In order to use ExampleApp\r\nAs a WP7 user\r\nI want to be enter text in the fields " +
-                    "on the child pivot page", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ChildPage", "  In order to use ExampleApp\r\n  As a WP7 user\r\n  I want to be enter text in the f" +
+                    "ields on the child pivot page", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -69,21 +69,21 @@ namespace ExampleApp.Spec
         {
 #line 6
 #line 7
- testRunner.Given("my app is uninstalled");
+    testRunner.Given("my app is uninstalled");
 #line 8
- testRunner.Given("my app is installed");
+    testRunner.Given("my app is installed");
 #line 9
- testRunner.Given("my app is not running");
+    testRunner.Given("my app is not running");
 #line 10
- testRunner.Given("my app is running");
+    testRunner.Given("my app is running");
 #line 11
- testRunner.Then("I wait for \"Waiting...\" to appear");
+    testRunner.Then("I wait for \"Waiting...\" to appear");
 #line 12
- testRunner.Then("I wait for \"Go!\" to appear");
+    testRunner.Then("I wait for \"Go!\" to appear");
 #line 13
- testRunner.Then("I press the \"Go!\" button");
+    testRunner.Then("I press the \"Go!\" button");
 #line 14
- testRunner.Then("I wait for \"item1\" to appear");
+    testRunner.Then("I wait for \"item1\" to appear");
 #line hidden
         }
         
@@ -95,11 +95,11 @@ namespace ExampleApp.Spec
 #line 16
 this.ScenarioSetup(scenarioInfo);
 #line 17
- testRunner.Then("I see the \"TextBoxInput\" field contains \"\"");
+    testRunner.Then("I see the \"TextBoxInput\" field contains \"\"");
 #line 18
- testRunner.And("I see the \"TextBoxOutput\" field contains \"\"");
+    testRunner.And("I see the \"TextBoxOutput\" field contains \"\"");
 #line 19
- testRunner.And("take a picture");
+    testRunner.And("take a picture");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -112,19 +112,48 @@ this.ScenarioSetup(scenarioInfo);
 #line 21
 this.ScenarioSetup(scenarioInfo);
 #line 22
- testRunner.Then("I see the \"TextBoxInput\" field contains \"\"");
+    testRunner.Then("I see the \"TextBoxInput\" field contains \"\"");
 #line 23
- testRunner.And("I see the \"TextBoxOutput\" field contains \"\"");
+    testRunner.And("I see the \"TextBoxOutput\" field contains \"\"");
 #line 24
- testRunner.And("take a picture");
+    testRunner.And("take a picture");
 #line 25
- testRunner.Then("I enter \"Hello World\" into \"TextBoxInput\"");
+    testRunner.Then("I enter \"Hello World\" into \"TextBoxInput\"");
 #line 26
- testRunner.Then("I see the \"TextBoxInput\" field contains \"Hello World\"");
+    testRunner.Then("I see the \"TextBoxInput\" field contains \"Hello World\"");
 #line 27
- testRunner.And("I see the \"TextBoxOutput\" field contains \"dlroW olleH\"");
+    testRunner.And("I see the \"TextBoxOutput\" field contains \"dlroW olleH\"");
 #line 28
- testRunner.Then("take a picture");
+    testRunner.Then("take a picture");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("An example broken test")]
+        public virtual void AnExampleBrokenTest()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("An example broken test", ((string[])(null)));
+#line 30
+this.ScenarioSetup(scenarioInfo);
+#line 31
+    testRunner.Then("I see the \"TextBoxInput\" field contains \"\"");
+#line 32
+    testRunner.And("I see the \"TextBoxOutput\" field contains \"\"");
+#line 33
+    testRunner.And("take a picture");
+#line 34
+    testRunner.Then("I press the \"BreakThingsCheckBox\" button");
+#line 35
+    testRunner.And("take a picture");
+#line 36
+    testRunner.Then("I enter \"Hello World\" into \"TextBoxInput\"");
+#line 37
+    testRunner.Then("I see the \"TextBoxInput\" field contains \"Hello World\"");
+#line 38
+    testRunner.Then("take a picture");
+#line 39
+    testRunner.And("I see the \"TextBoxOutput\" field contains \"dlroW olleH\"");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -134,44 +163,44 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ThePivotPageHasAPivotWhichRespondsToSwipes()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The Pivot Page has a Pivot which responds to swipes", ((string[])(null)));
-#line 30
-this.ScenarioSetup(scenarioInfo);
-#line 31
- testRunner.Then("I see \"item1\" is left of \"item2\"");
-#line 32
- testRunner.And("I see \"item2\" is left of \"item3\"");
-#line 33
- testRunner.And("I see \"Input\"");
-#line 36
- testRunner.Then("I swipe \"RightToLeft\"");
-#line 37
- testRunner.And("I wait 2 seconds");
-#line 38
- testRunner.Then("I see \"item2\" is left of \"item3\"");
-#line 39
- testRunner.And("I see \"item3\" is left of \"item1\"");
 #line 41
- testRunner.And("I see \"You are on pivot 2\"");
+this.ScenarioSetup(scenarioInfo);
+#line 42
+    testRunner.Then("I see \"item1\" is left of \"item2\"");
 #line 43
- testRunner.Then("I swipe \"RightToLeft\"");
+    testRunner.And("I see \"item2\" is left of \"item3\"");
 #line 44
- testRunner.And("I wait 2 seconds");
-#line 45
- testRunner.Then("I see \"item3\" is left of \"item1\"");
-#line 46
- testRunner.And("I see \"item1\" is left of \"item2\"");
+    testRunner.And("I see \"Input\"");
+#line 47
+    testRunner.Then("I swipe \"RightToLeft\"");
+#line 48
+    testRunner.And("I wait 2 seconds");
 #line 49
- testRunner.And("I see \"You are on pivot 3\"");
+    testRunner.Then("I see \"item2\" is left of \"item3\"");
 #line 50
- testRunner.Then("I swipe \"LeftToRight\"");
-#line 51
- testRunner.And("I wait 2 seconds");
+    testRunner.And("I see \"item3\" is left of \"item1\"");
 #line 52
- testRunner.Then("I see \"item2\" is left of \"item3\"");
-#line 53
- testRunner.And("I see \"item3\" is left of \"item1\"");
+    testRunner.And("I see \"You are on pivot 2\"");
+#line 54
+    testRunner.Then("I swipe \"RightToLeft\"");
 #line 55
- testRunner.And("I see \"You are on pivot 2\"");
+    testRunner.And("I wait 2 seconds");
+#line 56
+    testRunner.Then("I see \"item3\" is left of \"item1\"");
+#line 57
+    testRunner.And("I see \"item1\" is left of \"item2\"");
+#line 60
+    testRunner.And("I see \"You are on pivot 3\"");
+#line 61
+    testRunner.Then("I swipe \"LeftToRight\"");
+#line 62
+    testRunner.And("I wait 2 seconds");
+#line 63
+    testRunner.Then("I see \"item2\" is left of \"item3\"");
+#line 64
+    testRunner.And("I see \"item3\" is left of \"item1\"");
+#line 66
+    testRunner.And("I see \"You are on pivot 2\"");
 #line hidden
             this.ScenarioCleanup();
         }

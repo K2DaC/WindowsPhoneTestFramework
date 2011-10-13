@@ -33,6 +33,9 @@ namespace ExampleApp
 
         private void TextBoxInput_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (BreakThingsCheckBox.IsChecked ?? false)
+                return;
+
             var input = TextBoxInput.Text;
             var reversed = new string(input.Reverse().ToArray());
             TextBoxOutput.Text = reversed;

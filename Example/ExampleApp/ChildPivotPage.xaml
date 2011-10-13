@@ -26,6 +26,8 @@
                         <TextBox x:Name="TextBoxInput" TextChanged="TextBoxInput_TextChanged"></TextBox>
                         <TextBlock Text="Output"></TextBlock>
                         <TextBox x:Name="TextBoxOutput"></TextBox>
+                        <TextBlock Text="Break things?"></TextBlock>
+						<CheckBox x:Name="BreakThingsCheckBox" Content="Yes, please" />
                     </StackPanel>
                 </Grid>
             </controls:PivotItem>
