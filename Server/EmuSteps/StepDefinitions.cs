@@ -88,7 +88,7 @@ namespace WindowsPhoneTestFramework.EmuSteps
             Emu.PhoneAutomationController.TakePicture(out picture);
             picture.Save(fileName, ImageFormat.Png);
 
-            Console.WriteLine(string.Format("-> Picture saved to [__picture:{0}]</a>", fileName));
+            Console.WriteLine(string.Format("-> Picture saved to _startEmuShot_{0}_endEmuShot_</a>", fileName));
         }
 
         [Then(@"I see the ""([^\""]*)"" field contains ""([^\""]*)""$")]

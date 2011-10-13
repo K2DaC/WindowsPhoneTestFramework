@@ -19,6 +19,7 @@ namespace WindowsPhoneTestFramework.EmuSteps
 {
     public static class StepFlowContextHelpers
     {
+        private const string EmuShotPrefix = "_EmuShot_";
         private const string EmuControllerKey = "Emu.EmuAutomationController";
         private const string EmuPictureIndexKey = "Emu.PictureIndex";
 
@@ -64,7 +65,8 @@ namespace WindowsPhoneTestFramework.EmuSteps
                 var pictureIndex = (int) objectPictureIndex;
                 scenarioContext[EmuPictureIndexKey] = ++pictureIndex;
 
-                var fileName = String.Format("{0}_{1}_{2}.png",
+                var fileName = String.Format("{0}{1}_{2}_{3}.png",
+                                                EmuShotPrefix,
                                                 featureContext.FeatureInfo.Title,
                                                 scenarioContext.ScenarioInfo.Title,
                                                 pictureIndex);
