@@ -17,6 +17,7 @@ namespace WindowsPhoneTestFramework.EmuDriver
     public interface IDisplayInputController : ITrace
     {
         void EnsureWindowIsInForeground();
+        void ReleaseWindowFromForeground();
         void EnsureHardwareKeyboardEnabled();
         void EnsureHardwareKeyboardDisabled();
         WindowsPhoneOrientation GuessOrientation();

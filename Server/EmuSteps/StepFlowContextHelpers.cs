@@ -38,7 +38,8 @@ namespace WindowsPhoneTestFramework.EmuSteps
                 emu.Start(
                     configuration.BindingAddress == null ? null : new Uri(configuration.BindingAddress),
                     configuration.AutomationIdentification);
-
+                if (emu.DisplayInputController != null)
+                    emu.DisplayInputController.EnsureWindowIsInForeground();
                 context[EmuControllerKey] = emu;
                 return emu;
             }
@@ -85,6 +86,9 @@ namespace WindowsPhoneTestFramework.EmuSteps
                 if (!context.TryGetValue(EmuControllerKey, out emu))
                     return;
                 
+                if (emu.DisplayInputController != null)
+                    emu.DisplayInputController.ReleaseWindowFromForeground();
+
                 emu.Dispose();
                 context.Remove(EmuControllerKey);
             }

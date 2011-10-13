@@ -33,13 +33,13 @@ namespace WindowsPhoneTestFramework.EmuDriver
         public TimeSpan PauseDurationAfterPerformingGesture { get; set; }
         public TimeSpan PauseDurationAfterTextEntry { get; set; }
 
-        // Emulator Win32 Windows class name and caption
-        // - made public in case your environment uses different class/window names
+        // Emulator Win32 Windows process name, window class names and window titles
+        // - these are made public in case your environment uses different class/window names
         public string EmulatorWindowClassName { get; set; }
         public string EmulatorWindowWindowName { get; set; }
-
         public string EmulatorSkinWindowClassName { get; set; }
         public string EmulatorSkinWindowWindowName { get; set; }
+        public string EmulatorProcessName { get; set; }
 
         // reference to input simulator from WindowsInput
         private readonly IInputSimulator _inputSimulator;
@@ -52,6 +52,8 @@ namespace WindowsPhoneTestFramework.EmuDriver
 
             EmulatorSkinWindowWindowName = "Windows Phone Emulator";
             EmulatorSkinWindowClassName = "XDE_SkinWindow";
+
+            EmulatorProcessName = "XDE";
         }
 
         public EmulatorDisplayInputController(IInputSimulator inputSimulator)
@@ -72,13 +74,21 @@ namespace WindowsPhoneTestFramework.EmuDriver
                 throw new ManipulationFailedException("Failed to bring emulator skin window to foreground");
             */
 
-            var topMostResult = NativeMethods.MakeWindowTopMost(EmulatorSkinWindowClassName, EmulatorSkinWindowWindowName);
+            var topMostResult = NativeMethods.MakeWindowTopMost(EmulatorProcessName);
             if (!topMostResult)
                 throw new ManipulationFailedException("Failed to bring emulator skin window to topMost");
 
-            var result = NativeMethods.EnsureWindowIsInForeground(EmulatorSkinWindowClassName, EmulatorSkinWindowWindowName);
+            var result = NativeMethods.EnsureWindowIsInForeground(EmulatorProcessName);
             if (!result)
                 throw new ManipulationFailedException("Failed to bring emulator window to foreground");
+
+            Pause(PauseDurationAfterSettingForegroundWindow);
+        }
+
+        public void ReleaseWindowFromForeground()
+        {
+            if (!NativeMethods.RevokeWindowTopMost(EmulatorProcessName))
+                InvokeTrace("Failed to revoke emulator window topmost"); // this is ignored for now..
 
             Pause(PauseDurationAfterSettingForegroundWindow);
         }
