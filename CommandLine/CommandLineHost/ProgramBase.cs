@@ -15,6 +15,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using WindowsPhoneTestFramework.CommandLineHost.Commands;
 
 namespace WindowsPhoneTestFramework.CommandLineHost
 {
@@ -24,22 +25,18 @@ namespace WindowsPhoneTestFramework.CommandLineHost
 
         public ProgramBase()
         {
-            LoadActions();
-        }
-
-        protected class DescribedMethod
-        {
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public Action<string> Action { get; set; }
-        }
-
-        private void LoadActions()
-        {
             _actions = new Dictionary<string, DescribedMethod>();
+            AddCommands(new ConsoleCommands()
+                            {
+                                ActionList = _actions                                
+                            });
+        }
+
+        protected void AddCommands(object commandObject)
+        {
             var actions =
                 from method in
-                    this.GetType().GetMethods(BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.FlattenHierarchy)
+                    commandObject.GetType().GetMethods(BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.FlattenHierarchy)
                 let displayName =
                     (DisplayNameAttribute)
                     method.GetCustomAttributes(typeof(DisplayNameAttribute), false).FirstOrDefault()
@@ -65,7 +62,7 @@ namespace WindowsPhoneTestFramework.CommandLineHost
                                                        {
                                                            try
                                                            {
-                                                               thatThing.Method.Invoke(this, new object[] { input });
+                                                               thatThing.Method.Invoke(commandObject, new object[] { input });
                                                            }
                                                            catch (TargetInvocationException tie)
                                                            {
@@ -117,26 +114,6 @@ namespace WindowsPhoneTestFramework.CommandLineHost
                 {
                     Console.WriteLine("Unknown command: " + command);
                 }
-            }
-        }
-
-        [DisplayName("quit")]
-        [Description("shutdown this server - e.g. 'quit'")]
-        public void Quit(string ignored)
-        {
-            throw new QuitNowPleaseException();
-        }
-
-        [DisplayName("help")]
-        [Description("shows help text - e.g. 'help'")]
-        public void ShowHelp(string ignored)
-        {
-            Console.WriteLine("Available actions are:");
-            foreach (var action in _actions)
-            {
-                Console.WriteLine();
-                Console.WriteLine("-> " + action.Key);
-                Console.WriteLine(action.Value.Description);
             }
         }
 

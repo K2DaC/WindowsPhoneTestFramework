@@ -13,10 +13,11 @@ using System;
 using System.Text;
 using WindowsPhoneTestFramework.AutomationController;
 using WindowsPhoneTestFramework.CommandLineHost;
+using WindowsPhoneTestFramework.CommandLineHost.Commands;
 
 namespace WindowsPhoneTestFramework.AutomationHost
 {
-    class Program : AutomationUsingProgramBase
+    class Program : ProgramBase
     {
         public static void Main(string[] args)
         {
@@ -45,6 +46,11 @@ namespace WindowsPhoneTestFramework.AutomationHost
         public Program(CommandLine commandLine) 
         {
             StartServiceHost(commandLine);
+            var commands = new PhoneAutomationCommands()
+                               {
+                                   PhoneAutomationController = _serviceHost.Controller
+                               };
+            AddCommands(commands);
         }
 
         private void StartServiceHost(CommandLine commandLine)
@@ -58,7 +64,6 @@ namespace WindowsPhoneTestFramework.AutomationHost
                                };
             _serviceHost.Trace += (sender, args) => Console.WriteLine("-> " + args.Message); 
             _serviceHost.Start();
-            PhoneAutomationController = _serviceHost.Controller;
             Console.WriteLine("-> service started");
             Console.WriteLine();
         }

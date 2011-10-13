@@ -17,11 +17,11 @@ using System.IO;
 using System.Linq;
 using WindowsPhoneTestFramework.AutomationController.Interfaces;
 
-namespace WindowsPhoneTestFramework.CommandLineHost
+namespace WindowsPhoneTestFramework.CommandLineHost.Commands
 {
-    public class AutomationUsingProgramBase : ProgramBase
+    public class PhoneAutomationCommands
     {
-        protected IPhoneAutomationController PhoneAutomationController { get; set; }
+        public IPhoneAutomationController PhoneAutomationController { get; set; }
 
         [DisplayName("click")]
         [Description("sends a click message to the identified control - e.g. 'click Button1'")]
