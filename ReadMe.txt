@@ -1,17 +1,22 @@
 Readme... details and wiki to follow...
 =======================================
 
-There is an introduction video on http://bit.ly/wp7-test
+There is an introduction video on 
+
+             http://bit.ly/wp7-test
+
 
 Prerequisites
 -------------
+
 To get this to work, you need to install:
 
-- wp7 7.1 mango dev tools (I've not tested with just the free Express versions)
+- wp7 7.1 mango dev tools - so far not tested on the free Express versions
 
 - nunit
 
 - specflow
+
 
 Some possible problems:
 
@@ -23,6 +28,7 @@ Some possible problems:
 
      netsh http add urlacl url=http://+:8085/ user=<domain>\<user>
 
+	 
 QuickStart
 ----------
 
@@ -42,6 +48,7 @@ To start:
 	getText TextBoxOutput
 	doSwipe LeftToRight
 
+	
 Using the test platform
 -----------------------
 
@@ -50,6 +57,7 @@ To work out how to use the test platform in your own apps:
 1. Try looking at the code for ExampleApp - there's only one line that's added to enable testing - `Automation.Instance.Initialise();` in App.xaml.cs
 
 2. Try looking at the gherkin code in the ExampleApp.Spec features
+
 
 Coming soon
 -----------
