@@ -45,7 +45,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsInput">
-      <HintPath>..\Lib\WindowsInput\WindowsInput.dll</HintPath>
+      <HintPath>..\..\Lib\WindowsInput\WindowsInput.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

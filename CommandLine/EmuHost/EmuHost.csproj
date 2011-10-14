@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Args">
-      <HintPath>..\packages\Args.1.0.3\lib\Net40\Args.dll</HintPath>
+      <HintPath>..\..\packages\Args.1.0.3\lib\Net40\Args.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
