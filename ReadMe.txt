@@ -24,9 +24,9 @@ To get this to work, you need to install:
 
 Some possible problems:
 
-- To get the nunit-console script to work, then you need to either be running on a 32-bit OS - or you need to change nunit-console to have the 32-big flag set - use CorFlags.exe to do this:
+- For some script runners, then you may need to change script runner to have the 32-big flag set - try to find a 32-bit alternative (e.g. nunit-console-x86.exe) - or (at worst) use CorFlags.exe to change your test-runner.
 
-    "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\CorFlags.exe" "C:\Program Files (x86)\NUnit 2.5.10\bin\net-2.0\nunit-console.exe" /32BIT+
+    "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\CorFlags.exe" "your target.exe" /32BIT+
 
 - The server part of the code opens a WCF service on http://localhost:8085 - it needs permission to do this - use:
 
