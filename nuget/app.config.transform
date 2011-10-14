@@ -1,0 +1,24 @@
+<configuration>
+  <configSections>
+    <section name="specFlow" type="TechTalk.SpecFlow.Configuration.ConfigurationSectionHandler, TechTalk.SpecFlow" />
+  </configSections>
+  <specFlow>
+    <!-- For additional details on SpecFlow configuration options see https://github.com/techtalk/SpecFlow/wiki/Configuration -->
+    <unitTestProvider name="NUnit" />
+    <stepAssemblies>
+      <stepAssembly assembly="WindowsPhoneTestFramework.EmuSteps" />
+      <!-- <stepAssembly assembly="{name-of-assembly-containing-bindgins}" /> -->
+    </stepAssemblies>
+ </specFlow>
+  <appSettings>
+    <add key="EmuSteps.ProductId" value="YOUR-GUID-HERE" />
+    <add key="EmuSteps.IconPath" value="PATH-TO-YOUR-62x62-PNG-HERE" />
+    <add key="EmuSteps.XapPath" value="PATH-TO-YOUR-APP-XAP-HERE" />
+    <add key="EmuSteps.ApplicationName" value="YOUR-APP-NAME-HERE" />
+    <!--
+		you can also optionally add:
+			EmuSteps.BindingAddress
+			EmuSteps.AutomationIdentification
+      -->
+  </appSettings>
+</configuration>

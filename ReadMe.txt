@@ -8,7 +8,61 @@ There is an introduction video on
 There are some Wiki Pages now on
 
 			https://github.com/Expensify/WindowsPhoneTestFramework/wiki
+
 			
+General setup
+-------------
+
+For adding BDD to a class library project, see:
+
+			https://github.com/Expensify/WindowsPhoneTestFramework/wiki/Writing-a-new-SpecFlow-test-project-for-WindowsPhoneTestFramework
+			
+For adding the test client to a WP7 project, see:
+
+			https://github.com/Expensify/WindowsPhoneTestFramework/wiki/Adding-testing-to-an-application
+
+			
+NuGet setup - wp7 app
+---------------------
+
+If you have installed from NuGet into your WP7 App, then:
+
+1. in the App.xaml.cs constructor, add
+
+	```
+            #if DEBUG
+            WindowsPhoneTestFramework.AutomationClient.Automation.Instance.Initialise();
+            #endif // DEBUG
+	```
+
+If you have installed from NuGet into your test class library, then:
+
+1. Change the project Build from "Any CPU" to "x86" only
+
+2. Edit app.config to provide the necessary configuration values for your app
+
+    Be especially careful about the paths
+	
+	For finding the ProductId, see the WMAppManifest.xml file.
+	
+3. Add a new feature:
+
+	```
+	Feature: App Test
+		In order to test my app
+		As a WP7 Developer
+		I want to see it start and take a picture of it
+
+	Scenario: Start the app
+		Given my app is uninstalled
+		And my app is installed
+		And my app is running
+		Then I wait 5 seconds
+		Then take a picture
+	```
+	
+4. Run the tests
+
 
 Prerequisites
 -------------
@@ -33,8 +87,8 @@ Some possible problems:
      netsh http add urlacl url=http://+:8085/ user=<domain>\<user>
 
 	 
-QuickStart
-----------
+Source code build
+-----------------
 
 To start:
 
@@ -53,8 +107,8 @@ To start:
 	doSwipe LeftToRight
 
 	
-Using the test platform
------------------------
+Source code - using the test platform
+-------------------------------------
 
 To work out how to use the test platform in your own apps:
 
@@ -64,11 +118,11 @@ To work out how to use the test platform in your own apps:
 
 
 Questions
------------
+---------
 
 Please ask them on http://www.stackoverflow.com
 
 Contributing
------------
+------------
 
 Please do dive on in and help :)

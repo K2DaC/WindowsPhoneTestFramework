@@ -23,7 +23,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using WindowsPhoneTestFramework.AutomationClient;
 
 namespace ExampleApp
 {
@@ -69,7 +68,9 @@ namespace ExampleApp
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
-            Automation.Instance.Initialise();
+#if DEBUG
+            WindowsPhoneTestFramework.AutomationClient.Automation.Instance.Initialise();
+#endif // DEBUG
         }
 
         // Code to execute when the application is launching (eg, from Start)
