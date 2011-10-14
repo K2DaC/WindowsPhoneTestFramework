@@ -1,10 +1,14 @@
-Readme... details and wiki to follow...
-=======================================
+WindowsPhoneTestFramework
+=========================
 
 There is an introduction video on 
 
              http://bit.ly/wp7-test
 
+There are some Wiki Pages now on
+
+			https://github.com/Expensify/WindowsPhoneTestFramework/wiki
+			
 
 Prerequisites
 -------------
@@ -59,7 +63,12 @@ To work out how to use the test platform in your own apps:
 2. Try looking at the gherkin code in the ExampleApp.Spec features
 
 
-Coming soon
+Questions
 -----------
 
-That's all for now... I know it's not complete information... You can either wait for me to complete this readme... or you can dive on in and help :)
+Please ask them on http://www.stackoverflow.com
+
+Contributing
+-----------
+
+Please do dive on in and help :)
