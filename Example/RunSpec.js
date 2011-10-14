@@ -116,15 +116,11 @@ WScript.echo('');
 WScript.echo("======================");
 WScript.echo('Running tests...');
 WScript.echo('');
-WScript.echo('Note that nunit-console.exe must be set to 32-bit execution');
-WScript.echo('32-bit execution flags can be set using CorFlags.exe - e.g.');
-WScript.echo('   "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\CorFlags.exe" "C:\Program Files (x86)\NUnit 2.5.10\bin\net-2.0\nunit-console.exe" /32BIT+');
-WScript.echo('');
 WScript.echo("======================");
 WScript.echo('Now really running tests...');
 WScript.echo('');
 
-var batchCommand = '"C:/Program Files (x86)/NUnit 2.5.10/bin/net-2.0/nunit-console.exe"'
+var batchCommand = '"' + baseDirectory + '/../packages/NUnit.2.5.10.11092/tools/nunit-console-x86.exe"'
                     + ' "' + baseDirectory + '/ExampleApp.Spec/bin/debug/ExampleApp.Spec.dll"'
 					+ ' /labels /out=TestResult.txt /xml=TestResult.xml';
 WScript.echo(batchCommand);
@@ -135,7 +131,7 @@ WScript.echo('');
 WScript.echo("======================");
 WScript.echo(' Generating report...');
 WScript.echo('');
-var reportCommand = '"C:/Program Files (x86)/TechTalk/SpecFlow/specflow.exe"'
+var reportCommand = '"' + baseDirectory + '/../packages/SpecFlow.1.7.1/tools/specflow.exe"'
                     + ' nunitexecutionreport' 
 					+ ' "' + baseDirectory + "/ExampleApp/ExampleApp.csproj";
 shell.run(reportCommand, 1 /* show normal */, true /* wait for this to finish*/);
