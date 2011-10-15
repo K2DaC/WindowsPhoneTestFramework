@@ -77,13 +77,13 @@ namespace ExampleApp.Spec
 #line 10
     testRunner.Given("my app is running");
 #line 11
-    testRunner.Then("I wait for \"Waiting...\" to appear");
+    testRunner.Then("I may see the text \"Waiting...\"");
 #line 12
-    testRunner.Then("I wait for \"Go!\" to appear");
+    testRunner.Then("I wait for the text \"Go!\" to appear");
 #line 13
-    testRunner.Then("I press the \"Go!\" button");
+    testRunner.Then("I press the control \"Go!\"");
 #line 14
-    testRunner.Then("I wait for \"item1\" to appear");
+    testRunner.Then("I wait for the text \"item1\" to appear");
 #line hidden
         }
         
@@ -95,9 +95,9 @@ namespace ExampleApp.Spec
 #line 16
 this.ScenarioSetup(scenarioInfo);
 #line 17
-    testRunner.Then("I see the \"TextBoxInput\" field contains \"\"");
+    testRunner.Then("I see the control \"TextBoxInput\" contains \"\"");
 #line 18
-    testRunner.And("I see the \"TextBoxOutput\" field contains \"\"");
+    testRunner.And("I see the control \"TextBoxOutput\" contains \"\"");
 #line 19
     testRunner.And("take a picture");
 #line hidden
@@ -112,17 +112,17 @@ this.ScenarioSetup(scenarioInfo);
 #line 21
 this.ScenarioSetup(scenarioInfo);
 #line 22
-    testRunner.Then("I see the \"TextBoxInput\" field contains \"\"");
+    testRunner.Then("I see the control \"TextBoxInput\" contains \"\"");
 #line 23
-    testRunner.And("I see the \"TextBoxOutput\" field contains \"\"");
+    testRunner.And("I see the control \"TextBoxOutput\" contains \"\"");
 #line 24
     testRunner.And("take a picture");
 #line 25
-    testRunner.Then("I enter \"Hello World\" into \"TextBoxInput\"");
+    testRunner.Then("I enter \"Hello World\" into the control \"TextBoxInput\"");
 #line 26
-    testRunner.Then("I see the \"TextBoxInput\" field contains \"Hello World\"");
+    testRunner.Then("I see the control \"TextBoxInput\" contains \"Hello World\"");
 #line 27
-    testRunner.And("I see the \"TextBoxOutput\" field contains \"dlroW olleH\"");
+    testRunner.And("I see the control \"TextBoxOutput\" contains \"dlroW olleH\"");
 #line 28
     testRunner.Then("take a picture");
 #line hidden
@@ -137,23 +137,23 @@ this.ScenarioSetup(scenarioInfo);
 #line 30
 this.ScenarioSetup(scenarioInfo);
 #line 31
-    testRunner.Then("I see the \"TextBoxInput\" field contains \"\"");
+    testRunner.Then("I see the control \"TextBoxInput\" contains \"\"");
 #line 32
-    testRunner.And("I see the \"TextBoxOutput\" field contains \"\"");
+    testRunner.And("I see the control \"TextBoxOutput\" contains \"\"");
 #line 33
     testRunner.And("take a picture");
 #line 34
-    testRunner.Then("I press the \"BreakThingsCheckBox\" button");
+    testRunner.Then("I press the control \"BreakThingsCheckBox\"");
 #line 35
     testRunner.And("take a picture");
 #line 36
-    testRunner.Then("I enter \"Hello World\" into \"TextBoxInput\"");
+    testRunner.Then("I enter \"Hello World\" into the control \"TextBoxInput\"");
 #line 37
-    testRunner.Then("I see the \"TextBoxInput\" field contains \"Hello World\"");
+    testRunner.Then("I see the control \"TextBoxInput\" contains \"Hello World\"");
 #line 38
     testRunner.Then("take a picture");
 #line 39
-    testRunner.And("I see the \"TextBoxOutput\" field contains \"dlroW olleH\"");
+    testRunner.And("I see the control \"TextBoxOutput\" contains \"dlroW olleH\"");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -166,9 +166,9 @@ this.ScenarioSetup(scenarioInfo);
 #line 41
 this.ScenarioSetup(scenarioInfo);
 #line 42
-    testRunner.Then("I see \"item1\" is left of \"item2\"");
+    testRunner.Then("I see the control \"item1\" is left of the control \"item2\"");
 #line 43
-    testRunner.And("I see \"item2\" is left of \"item3\"");
+    testRunner.And("I see the control \"item2\" is left of the control \"item3\"");
 #line 44
     testRunner.And("I see \"Input\"");
 #line 47
@@ -176,31 +176,31 @@ this.ScenarioSetup(scenarioInfo);
 #line 48
     testRunner.And("I wait 2 seconds");
 #line 49
-    testRunner.Then("I see \"item2\" is left of \"item3\"");
+    testRunner.Then("I see the control \"item2\" is left of the control \"item3\"");
 #line 50
-    testRunner.And("I see \"item3\" is left of \"item1\"");
+    testRunner.And("I see the control \"item3\" is left of the control \"item1\"");
 #line 52
-    testRunner.And("I see \"You are on pivot 2\"");
+    testRunner.And("I see the text \"You are on pivot 2\"");
 #line 54
     testRunner.Then("I swipe \"RightToLeft\"");
 #line 55
     testRunner.And("I wait 2 seconds");
 #line 56
-    testRunner.Then("I see \"item3\" is left of \"item1\"");
+    testRunner.Then("I see the control \"item3\" is left of the control \"item1\"");
 #line 57
-    testRunner.And("I see \"item1\" is left of \"item2\"");
+    testRunner.And("I see the control \"item1\" is left of the control \"item2\"");
 #line 60
-    testRunner.And("I see \"You are on pivot 3\"");
+    testRunner.And("I see the text \"You are on pivot 3\"");
 #line 61
     testRunner.Then("I swipe \"LeftToRight\"");
 #line 62
     testRunner.And("I wait 2 seconds");
 #line 63
-    testRunner.Then("I see \"item2\" is left of \"item3\"");
+    testRunner.Then("I see the control \"item2\" is left of the control \"item3\"");
 #line 64
-    testRunner.And("I see \"item3\" is left of \"item1\"");
+    testRunner.And("I see the control \"item3\" is left of the control \"item1\"");
 #line 66
-    testRunner.And("I see \"You are on pivot 2\"");
+    testRunner.And("I see the text \"You are on pivot 2\"");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -8,19 +8,21 @@ Scenario: Main Page loads after a few seconds
 	Given my app is installed
 	Given my app is not running
 	Given my app is running
-	Then I wait for "Waiting..." to appear
 	Then take a picture
-	Then I wait for "Go!" to appear
+	Then I may see the text "Waiting..."
+	Then I wait for the text "Go!" to appear
 	Then take a picture
 
-Scenario: Main Page provides a Go button
+Scenario: Main Page provides a Go button that provides access to the ChildPivotPage
 	Given my app is uninstalled
 	Given my app is installed
 	Given my app is not running
 	Given my app is running
-	Then I wait for "Waiting..." to appear
-	Then I wait for "Go!" to appear
 	Then take a picture
-	Then I press the "Go!" button
-	Then I wait for "item1" to appear
+	Then I may see the text "Waiting..."
+	Then I wait for the text "Go!" to appear
+	Then take a picture
+	Then I press the control "Go!"
+	Then take a picture
+	Then I wait for the text "item1" to appear
 	Then take a picture

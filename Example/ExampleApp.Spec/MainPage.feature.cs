@@ -79,11 +79,11 @@ this.ScenarioSetup(scenarioInfo);
 #line 10
  testRunner.Given("my app is running");
 #line 11
- testRunner.Then("I wait for \"Waiting...\" to appear");
-#line 12
  testRunner.Then("take a picture");
+#line 12
+ testRunner.Then("I may see the text \"Waiting...\"");
 #line 13
- testRunner.Then("I wait for \"Go!\" to appear");
+ testRunner.Then("I wait for the text \"Go!\" to appear");
 #line 14
  testRunner.Then("take a picture");
 #line hidden
@@ -91,10 +91,10 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Main Page provides a Go button")]
-        public virtual void MainPageProvidesAGoButton()
+        [NUnit.Framework.DescriptionAttribute("Main Page provides a Go button that provides access to the ChildPivotPage")]
+        public virtual void MainPageProvidesAGoButtonThatProvidesAccessToTheChildPivotPage()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Main Page provides a Go button", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Main Page provides a Go button that provides access to the ChildPivotPage", ((string[])(null)));
 #line 16
 this.ScenarioSetup(scenarioInfo);
 #line 17
@@ -106,16 +106,20 @@ this.ScenarioSetup(scenarioInfo);
 #line 20
  testRunner.Given("my app is running");
 #line 21
- testRunner.Then("I wait for \"Waiting...\" to appear");
-#line 22
- testRunner.Then("I wait for \"Go!\" to appear");
-#line 23
  testRunner.Then("take a picture");
+#line 22
+ testRunner.Then("I may see the text \"Waiting...\"");
+#line 23
+ testRunner.Then("I wait for the text \"Go!\" to appear");
 #line 24
- testRunner.Then("I press the \"Go!\" button");
+ testRunner.Then("take a picture");
 #line 25
- testRunner.Then("I wait for \"item1\" to appear");
+ testRunner.Then("I press the control \"Go!\"");
 #line 26
+ testRunner.Then("take a picture");
+#line 27
+ testRunner.Then("I wait for the text \"item1\" to appear");
+#line 28
  testRunner.Then("take a picture");
 #line hidden
             this.ScenarioCleanup();
