@@ -71,20 +71,14 @@ namespace ExampleApp.Spec
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
- testRunner.Given("my app is uninstalled");
+ testRunner.Given("my app is clean installed and running");
 #line 8
- testRunner.Given("my app is installed");
-#line 9
- testRunner.Given("my app is not running");
-#line 10
- testRunner.Given("my app is running");
-#line 11
  testRunner.Then("take a picture");
-#line 12
+#line 9
  testRunner.Then("I may see the text \"Waiting...\"");
-#line 13
+#line 10
  testRunner.Then("I wait for the text \"Go!\" to appear");
-#line 14
+#line 11
  testRunner.Then("take a picture");
 #line hidden
             this.ScenarioCleanup();
@@ -95,32 +89,53 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void MainPageProvidesAGoButtonThatProvidesAccessToTheChildPivotPage()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Main Page provides a Go button that provides access to the ChildPivotPage", ((string[])(null)));
-#line 16
+#line 13
 this.ScenarioSetup(scenarioInfo);
-#line 17
- testRunner.Given("my app is uninstalled");
-#line 18
- testRunner.Given("my app is installed");
-#line 19
- testRunner.Given("my app is not running");
-#line 20
- testRunner.Given("my app is running");
-#line 21
+#line 14
+ testRunner.Given("my app is clean installed and running");
+#line 15
  testRunner.Then("take a picture");
-#line 22
+#line 16
  testRunner.Then("I may see the text \"Waiting...\"");
-#line 23
+#line 17
  testRunner.Then("I wait for the text \"Go!\" to appear");
-#line 24
+#line 18
  testRunner.Then("take a picture");
-#line 25
+#line 19
  testRunner.Then("I press the control \"Go!\"");
+#line 20
+ testRunner.Then("take a picture");
+#line 21
+ testRunner.Then("I wait for the text \"item1\" to appear");
+#line 22
+ testRunner.Then("take a picture");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Back button works on Main Page")]
+        public virtual void BackButtonWorksOnMainPage()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Back button works on Main Page", ((string[])(null)));
+#line 24
+this.ScenarioSetup(scenarioInfo);
+#line 25
+ testRunner.Given("my app is clean installed and running");
 #line 26
  testRunner.Then("take a picture");
 #line 27
- testRunner.Then("I wait for the text \"item1\" to appear");
+ testRunner.Then("I may see the text \"Waiting...\"");
 #line 28
+ testRunner.Then("I wait for the text \"Go!\" to appear");
+#line 29
  testRunner.Then("take a picture");
+#line 30
+ testRunner.Then("I go back");
+#line 31
+ testRunner.Then("I wait 2 seconds");
+#line 32
+ testRunner.Then("my app is not running");
 #line hidden
             this.ScenarioCleanup();
         }

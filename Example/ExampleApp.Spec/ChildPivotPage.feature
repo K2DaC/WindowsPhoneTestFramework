@@ -4,10 +4,7 @@
     I want to be enter text in the fields on the child pivot page
 
 Background:
-    Given my app is uninstalled
-    Given my app is installed
-    Given my app is not running
-    Given my app is running
+	Given my app is clean installed and running
     Then I may see the text "Waiting..."
     Then I wait for the text "Go!" to appear
     Then I press the control "Go!"
@@ -65,3 +62,12 @@ Scenario: The Pivot Page has a Pivot which responds to swipes
     #And I don't see "Input"
     And I see the text "You are on pivot 2"
     #And I don't see "You are on pivot 3"
+
+Scenario: Back button works on Pivot Page
+    Then I go back
+	And I wait 2 seconds
+	Then take a picture
+	And I see the text "page name"
+    Then I go back
+	And I wait 2 seconds
+	Then my app is not running
