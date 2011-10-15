@@ -11,6 +11,7 @@
 
 using System;
 using System.ComponentModel;
+using WindowsPhoneTestFramework.CommandLineHost;
 using WindowsPhoneTestFramework.EmuDriver;
 
 namespace WindowsPhoneTestFramework.EmuHost.Commands
@@ -20,7 +21,7 @@ namespace WindowsPhoneTestFramework.EmuHost.Commands
         public IDriver Driver { get; set; }
         public AppLaunchingCommandLine CommandLine;
 
-        [DisplayName("install")]
+        [CommandLineCommand("install")]
         [Description("installs the app - e.g. 'install'")]
         public void Install(string ignored)
         {
@@ -28,7 +29,7 @@ namespace WindowsPhoneTestFramework.EmuHost.Commands
             Console.WriteLine("install:" + result);
         }
 
-        [DisplayName("forceInstall")]
+        [CommandLineCommand("forceInstall")]
         [Description("installs the app - shutting it down first if required - e.g. 'forceInstall'")]
         public void ForceInstall(string ignored)
         {
@@ -36,7 +37,7 @@ namespace WindowsPhoneTestFramework.EmuHost.Commands
             Console.WriteLine("forceInstall:" + result);
         }
 
-        [DisplayName("uninstall")]
+        [CommandLineCommand("uninstall")]
         [Description("uninstalls the app - e.g. 'uninstall'")]
         public void Uninstall(string ignored)
         {
@@ -44,7 +45,7 @@ namespace WindowsPhoneTestFramework.EmuHost.Commands
             Console.WriteLine("uninstall:" + result);
         }
 
-        [DisplayName("forceUninstall")]
+        [CommandLineCommand("forceUninstall")]
         [Description("uninstalls the app - shutting it down first if required - e.g. 'forceUninstall'")]
         public void ForceUninstall(string ignored)
         {
@@ -52,7 +53,7 @@ namespace WindowsPhoneTestFramework.EmuHost.Commands
             Console.WriteLine("forceUninstall:" + result);
         }
 
-        [DisplayName("launch")]
+        [CommandLineCommand("launch")]
         [Description("launches the app - e.g. 'launch'")]
         public void Launch(string ignored)
         {
@@ -60,7 +61,7 @@ namespace WindowsPhoneTestFramework.EmuHost.Commands
             Console.WriteLine("launch:" + result);
         }
 
-        [DisplayName("stop")]
+        [CommandLineCommand("stop")]
         [Description("stop the app - e.g. 'stop'")]
         public void Stop(string ignored)
         {

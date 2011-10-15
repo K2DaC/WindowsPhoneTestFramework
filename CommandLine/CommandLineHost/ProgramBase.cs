@@ -32,47 +32,6 @@ namespace WindowsPhoneTestFramework.CommandLineHost
                             });
         }
 
-        protected void AddCommands(object commandObject)
-        {
-            var actions =
-                from method in
-                    commandObject.GetType().GetMethods(BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.FlattenHierarchy)
-                let displayName =
-                    (DisplayNameAttribute)
-                    method.GetCustomAttributes(typeof(DisplayNameAttribute), false).FirstOrDefault()
-                let description =
-                    (DescriptionAttribute)
-                    method.GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault()
-                where displayName != null
-                select new
-                           {
-                               Name = displayName.DisplayName,
-                               Description = description == null ? string.Empty : description.Description,
-                               Method = method
-                           };
-
-            foreach (var thing in actions)
-            {
-                var thatThing = thing;
-                _actions[thatThing.Name] = new DescribedMethod()
-                                               {
-                                                   Name = thatThing.Name,
-                                                   Description = thatThing.Description,
-                                                   Action = input => 
-                                                       {
-                                                           try
-                                                           {
-                                                               thatThing.Method.Invoke(commandObject, new object[] { input });
-                                                           }
-                                                           catch (TargetInvocationException tie)
-                                                           {
-                                                               throw tie.InnerException;
-                                                           }
-                                                       }
-                                               };
-            }
-        }
-
         public void Dispose()
         {
             Dispose(true);
@@ -135,6 +94,53 @@ namespace WindowsPhoneTestFramework.CommandLineHost
             {
                 Console.WriteLine(string.Format("Exception seen - {0} - {1}", exception.GetType().FullName, exception.Message));
             }
+        }
+
+        protected void AddCommands(object commandObject)
+        {
+            var actions =
+                from method in
+                    commandObject.GetType().GetMethods(BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.FlattenHierarchy)
+                let commandLineCommand =
+                    (CommandLineCommandAttribute)
+                    method.GetCustomAttributes(typeof(CommandLineCommandAttribute), false).FirstOrDefault()
+                let description =
+                    (DescriptionAttribute)
+                    method.GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault()
+                where commandLineCommand != null
+                select new
+                {
+                    Name = commandLineCommand.Name,
+                    Description = description == null ? string.Empty : description.Description,
+                    Method = method
+                };
+
+            foreach (var thing in actions)
+            {
+                var method = CreateDescribedMethod(commandObject, thing.Name, thing.Description, thing.Method);
+                _actions[method.Name] = method;
+            }
+        }
+
+        private static DescribedMethod CreateDescribedMethod(object commandObject, string commandLineCommand, string description, MethodInfo methodInfo)
+        {
+            return new DescribedMethod()
+                       {
+                           Name = commandLineCommand,
+                           Description = description,
+                           Action = input =>
+                                        {
+                                            try
+                                            {
+                                                methodInfo.Invoke(commandObject,
+                                                                  new object[] { input });
+                                            }
+                                            catch (TargetInvocationException tie)
+                                            {
+                                                throw tie.InnerException;
+                                            }
+                                        }
+                       };
         }
     }
 }

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandLineCommandAttribute.cs" />
     <Compile Include="Commands\PhoneAutomationCommands.cs" />
     <Compile Include="Commands\ConsoleCommands.cs" />
     <Compile Include="DescribedMethod.cs" />

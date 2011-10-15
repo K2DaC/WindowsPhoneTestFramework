@@ -19,14 +19,14 @@ namespace WindowsPhoneTestFramework.CommandLineHost.Commands
     {
         public Dictionary<string, DescribedMethod> ActionList;
 
-        [DisplayName("quit")]
+        [CommandLineCommand("quit")]
         [Description("shutdown this server - e.g. 'quit'")]
         public void Quit(string ignored)
         {
             throw new QuitNowPleaseException();
         }
 
-        [DisplayName("help")]
+        [CommandLineCommand("help")]
         [Description("shows help text - e.g. 'help'")]
         public void ShowHelp(string ignored)
         {

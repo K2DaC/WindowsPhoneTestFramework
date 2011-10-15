@@ -12,6 +12,7 @@
 using System;
 using System.ComponentModel;
 using WindowsInput.Native;
+using WindowsPhoneTestFramework.CommandLineHost;
 using WindowsPhoneTestFramework.EmuDriver;
 
 namespace WindowsPhoneTestFramework.EmuHost.Commands
@@ -20,7 +21,7 @@ namespace WindowsPhoneTestFramework.EmuHost.Commands
     {
         public IDisplayInputController DisplayInputController { get; set; }
 
-        [DisplayName("hardwareButton")]
+        [CommandLineCommand("hardwareButton")]
         [Description("press a hardware button - Back, Start, Search, Camera, VolumeUp, VolumeDown, Power - e.g. 'hardwareButton Back'")]
         public void PressHardware(string whichButton)
         {
@@ -31,7 +32,7 @@ namespace WindowsPhoneTestFramework.EmuHost.Commands
             Console.WriteLine("hardwareButton: Completed");
         }
 
-        [DisplayName("textEntry")]
+        [CommandLineCommand("textEntry")]
         [Description("enter text - e.g. 'enterText Hello World'")]
         public void TextEntry(string text)
         {
@@ -41,7 +42,7 @@ namespace WindowsPhoneTestFramework.EmuHost.Commands
             Console.WriteLine("textEntry: Completed");
         }
 
-        [DisplayName("sendKeyPress")]
+        [CommandLineCommand("sendKeyPress")]
         [Description("enter a specific virtual key code - e.g. 'enterText VK_U'")]
         public void SendKeyPress(string whichCode)
         {
@@ -52,7 +53,7 @@ namespace WindowsPhoneTestFramework.EmuHost.Commands
             Console.WriteLine("sendKeyPress: Completed");
         }
 
-        [DisplayName("listKeyCodes")]
+        [CommandLineCommand("listKeyCodes")]
         [Description("lists all defined virtual key code - for info on key codes mapped for emulator, see http://msdn.microsoft.com/en-us/library/ff754352(v=VS.92).aspx - e.g. 'listKeyCodes'")]
         public void ListKeyCodes(string ignore)
         {
@@ -69,7 +70,7 @@ namespace WindowsPhoneTestFramework.EmuHost.Commands
             RightToLeft
         }
 
-        [DisplayName("disableHardwareKeyboard")]
+        [CommandLineCommand("disableHardwareKeyboard")]
         [Description("disable the PC keyboard - the soft keyboard will then be available - note that other commands - textEntry, keyPress, hardwareButton - reset this as they use the PC keyboard buffers - e.g. 'disableHardwareKeyboard'")]
         public void DisableHardwareKeyboard(string ignored)
         {
@@ -77,7 +78,7 @@ namespace WindowsPhoneTestFramework.EmuHost.Commands
             Console.WriteLine("disableHardwareKeyboard: Completed");
         }
 
-        [DisplayName("doSwipe")]
+        [CommandLineCommand("doSwipe")]
         [Description("completes a mouse swipe across the screen - currently only LeftToRight or RightToLeft across the horizontal and vertical middle of the screen supported - e.g. 'sendSwipe LeftToRight'")]
         public void SendSwipe(string whichSwipe)
         {

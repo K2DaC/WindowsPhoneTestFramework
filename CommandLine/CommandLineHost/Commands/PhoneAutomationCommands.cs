@@ -23,23 +23,31 @@ namespace WindowsPhoneTestFramework.CommandLineHost.Commands
     {
         public IPhoneAutomationController PhoneAutomationController { get; set; }
 
-        [DisplayName("click")]
-        [Description("sends a click message to the identified control - e.g. 'click Button1'")]
+#warning Delete click... it's there only for people who watched the "how to" video
+        [CommandLineCommand("click")]
+        [Description("deprecated... this method is now replaced by invokeTap - sorry!")]
         public void Click(string whatToClick)
         {
-            var result = PhoneAutomationController.Click(whatToClick);
+            Console.WriteLine("Click: this method is now replaced by invokeTap - sorry!");
+        }
+
+        [CommandLineCommand("invokeTap")]
+        [Description("invoke the action that a tap would normally do on the identified control - for a button this is Click, for a checkbox this is Toggle, for other controls you'll need to setup the mapping yourself using AddAutomationPeerHandlerForTapAction and AddUIElementHandlerForTapAction methods - e.g. 'invoke Button1'")]
+        public void InvokeTap(string whatToClick)
+        {
+            var result = PhoneAutomationController.InvokeControlTapAction(whatToClick);
             Console.WriteLine("Click:" + result.ToString());
         }
 
-        [DisplayName("ping")]
+        [CommandLineCommand("ping")]
         [Description("sends an 'are you alive?' message to the application to test connectivity to the app - e.g. 'ping'")]
         public void ConfirmAlive(string ignored)
         {
-            var result = PhoneAutomationController.ConfirmAlive();
+            var result = PhoneAutomationController.LookIsAlive();
             Console.WriteLine("Alive:" + result.ToString());
         }
 
-        [DisplayName("lookForText")]
+        [CommandLineCommand("lookForText")]
         [Description("looks for displayed text within the app UI - e.g. 'lookForText Page 1'")]
         public void LookForText(string whatToLookFor)
         {
@@ -47,7 +55,7 @@ namespace WindowsPhoneTestFramework.CommandLineHost.Commands
             Console.WriteLine("LookForText:" + result.ToString());
         }
 
-        [DisplayName("waitForText")]
+        [CommandLineCommand("waitForText")]
         [Description("waits for up to 1 minute for the text to be displayed within the app UI - e.g. 'waitForText Page 2'")]
         public void WhatForText(string whatToWaitFor)
         {
@@ -55,16 +63,16 @@ namespace WindowsPhoneTestFramework.CommandLineHost.Commands
             Console.WriteLine("WaitForText:" + result.ToString());
         }
 
-        [DisplayName("getText")]
+        [CommandLineCommand("getText")]
         [Description("gets text from the named control in the app UI - e.g. 'getText TextBox1'")]
         public void GetText(string whatToGet)
         {
             string text;
-            var result = PhoneAutomationController.TryGetText(whatToGet, out text);
+            var result = PhoneAutomationController.TryGetTextFromControl(whatToGet, out text);
             Console.WriteLine("GetText:" + (result ? text : "FAIL"));
         }
 
-        [DisplayName("setText")]
+        [CommandLineCommand("setText")]
         [Description("sets text on the named control in the app UI - e.g. 'setText TextBox1=Hello World'")]
         public void SetText(string whatToSetAndValue)
         {
@@ -75,11 +83,11 @@ namespace WindowsPhoneTestFramework.CommandLineHost.Commands
                 return;
             }
 
-            var result = PhoneAutomationController.SetText(items[0], items[1]);
+            var result = PhoneAutomationController.SetTextOnControl(items[0], items[1]);
             Console.WriteLine("SetText:" + result);
         }
 
-        [DisplayName("setFocus")]
+        [CommandLineCommand("setFocus")]
         [Description("sets the focus to the specified control - e.g. 'setFocus TextBox1'")]
         public void SetFocus(string whichControl)
         {
@@ -87,11 +95,11 @@ namespace WindowsPhoneTestFramework.CommandLineHost.Commands
             Console.WriteLine("setFocus: " + result);
         }
 
-        [DisplayName("getPosition")]
+        [CommandLineCommand("getPosition")]
         [Description("gets the position of the specified control as device screen location - e.g. 'getPosition TextBox1'")]
         public void GetPosition(string whichControl)
         {
-            var position = PhoneAutomationController.GetPosition(whichControl);
+            var position = PhoneAutomationController.GetPositionOfControl(whichControl);
             if (position == RectangleF.Empty)
             {
                 Console.WriteLine("getPosition: failed");
@@ -101,7 +109,7 @@ namespace WindowsPhoneTestFramework.CommandLineHost.Commands
             Console.WriteLine(string.Format("getPosition: {0:0.0} {1:0.0} {2:0.0} {3:0.0}", position.Left, position.Top, position.Width, position.Height));
         }
 
-        [DisplayName("screenshot")]
+        [CommandLineCommand("screenshot")]
         [Description("requests a screenshot from the running application - provide an optional control to just picture that control - e.g. 'screenshot' or 'screenshot TextBox1'")]
         public void TakeScreenshot(string optionalControlId)
         {
