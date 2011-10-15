@@ -24,11 +24,12 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote
                 return;
 
             // if element is not visible, then return an empty position
-            if (element.Visibility == Visibility.Collapsed)
-            {
-                SendPositionResult(0.0, 0.0, 0.0, 0.0);
-                return;
-            }
+            if (ReturnEmptyIfNotVisible)
+                if (element.Visibility == Visibility.Collapsed)
+                {
+                    SendPositionResult(0.0, 0.0, 0.0, 0.0);
+                    return;
+                }
 
             try
             {

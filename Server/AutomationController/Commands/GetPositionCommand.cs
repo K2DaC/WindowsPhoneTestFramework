@@ -13,5 +13,11 @@ namespace WindowsPhoneTestFramework.AutomationController.Commands
 {
     public class GetPositionCommand : AutomationElementCommandBase
     {
+        public bool ReturnEmptyIfNotVisible { get; set; }
+
+        public GetPositionCommand()
+        {
+            ReturnEmptyIfNotVisible = true; // default is that the command will report {0,0,0,0} for any control with visibility off
+        }
     }
 }
