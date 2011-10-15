@@ -17,31 +17,21 @@ using Microsoft.Phone.Controls;
 
 namespace WindowsPhoneTestFramework.AutomationClient.Remote
 {
+
     public partial class TakePictureCommand
     {
         public byte[] DoCapture()
         {
-            FrameworkElement toSnap;
+            FrameworkElement toSnap = null;
+            
+            if (!AutomationIdIsEmpty)
+                toSnap = GetFrameworkElement(false);
 
-            if (AutomationIdentifier == null)
-            {
-                // find the current page
-                var rootVisual = (PhoneApplicationFrame) Application.Current.RootVisual;
-                if (rootVisual == null)
-                    return null;
+            if (toSnap == null)
+                toSnap = GetApplicationRootVisual();
 
-                var currentPage = rootVisual.Content as PhoneApplicationPage;
-                if (currentPage == null)
-                    return null;
-
-                toSnap = currentPage;
-            }
-            else
-            {
-                toSnap = GetFrameworkElement();
-                if (toSnap == null)
-                    return null;
-            }
+            if (toSnap == null)
+                return null;
 
             // Save to bitmap
             var bmp = new WriteableBitmap((int)toSnap.ActualWidth, (int)toSnap.ActualHeight);
