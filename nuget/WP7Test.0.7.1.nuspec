@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>WP7Test</id>
+    <version>0.7.1</version>
+    <title>BDD - Windows Phone Test Framework</title>
+    <authors>slodge</authors>
+    <owners>slodge</owners>
+    <licenseUrl>http://opensource.org/licenses/ms-pl.html</licenseUrl>
+    <projectUrl>https://github.com/Expensify/WindowsPhoneTestFramework</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Class library project package.
+
+Provides a SpecFlow testing framework for Windows Phone apps within the emulator.</description>
+    <summary>Class library project. Provides BDD SpecFlow testing framework for Windows Phone emulator</summary>
+    <releaseNotes>First full release</releaseNotes>
+    <tags>testing specflow nunit bdd wp7 wp7dev windowsphone</tags>
+    <dependencies>
+      <dependency id="SpecFlow" version="1.7.1" />
+      <dependency id="NUnit" version="2.5.10.11092" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="app.config.transform" target="content\app.config.transform" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsInput.dll" target="lib\net40\WindowsInput.dll" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsInput.pdb" target="lib\net40\WindowsInput.pdb" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsInput.xml" target="lib\net40\WindowsInput.xml" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.AutomationController.dll" target="lib\net40\WindowsPhoneTestFramework.AutomationController.dll" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.AutomationController.pdb" target="lib\net40\WindowsPhoneTestFramework.AutomationController.pdb" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.EmuAutomationController.dll" target="lib\net40\WindowsPhoneTestFramework.EmuAutomationController.dll" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.EmuAutomationController.pdb" target="lib\net40\WindowsPhoneTestFramework.EmuAutomationController.pdb" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.EmuDriver.dll" target="lib\net40\WindowsPhoneTestFramework.EmuDriver.dll" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.EmuDriver.pdb" target="lib\net40\WindowsPhoneTestFramework.EmuDriver.pdb" />
+    <file src="..\Server\EmuSteps\bin\release\WindowsPhoneTestFramework.EmuSteps.dll" target="lib\net40\WindowsPhoneTestFramework.EmuSteps.dll" />
+    <file src="..\Server\EmuSteps\bin\release\WindowsPhoneTestFramework.EmuSteps.dll.config" target="lib\net40\WindowsPhoneTestFramework.EmuSteps.dll.config" />
+    <file src="..\Server\Emusteps\bin\release\WindowsPhoneTestFramework.EmuSteps.pdb" target="lib\net40\WindowsPhoneTestFramework.EmuSteps.pdb" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.Utils.dll" target="lib\net40\WindowsPhoneTestFramework.Utils.dll" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.Utils.pdb" target="lib\net40\WindowsPhoneTestFramework.Utils.pdb" />
+    <file src="..\Client\AutomationClient\bin\release\WindowsPhoneTestFramework.AutomationClient.dll" target="lib\sl4-wp71\WindowsPhoneTestFramework.AutomationClient.dll" />
+    <file src="..\Client\AutomationClient\bin\release\WindowsPhoneTestFramework.AutomationClient.pdb" target="lib\sl4-wp71\WindowsPhoneTestFramework.AutomationClient.pdb" />
+    <file src="..\CommandLine\EmuHost\bin\release\Args.dll" target="tools\Args.dll" />
+    <file src="..\CommandLine\EmuHost\bin\release\Args.xml" target="tools\Args.xml" />
+    <file src="..\CommandLine\EmuForeground\bin\release\EmuForeground.exe" target="tools\EmuForeground.exe" />
+    <file src="..\CommandLine\EmuForeground\bin\release\EmuForeground.pdb" target="tools\EmuForeground.pdb" />
+    <file src="..\CommandLine\EmuBackground\bin\release\EmuBackground.exe" target="tools\EmuBackground.exe" />
+    <file src="..\CommandLine\EmuBackground\bin\release\EmuBackground.pdb" target="tools\EmuBackground.pdb" />
+    <file src="..\CommandLine\EmuHost\bin\release\EmuHost.exe" target="tools\EmuHost.exe" />
+    <file src="..\CommandLine\EmuHost\bin\release\EmuHost.pdb" target="tools\EmuHost.pdb" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsInput.dll" target="tools\WindowsInput.dll" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsInput.pdb" target="tools\WindowsInput.pdb" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsInput.xml" target="tools\WindowsInput.xml" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.AutomationController.dll" target="tools\WindowsPhoneTestFramework.AutomationController.dll" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.AutomationController.pdb" target="tools\WindowsPhoneTestFramework.AutomationController.pdb" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.CommandLineHost.dll" target="tools\WindowsPhoneTestFramework.CommandLineHost.dll" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.CommandLineHost.pdb" target="tools\WindowsPhoneTestFramework.CommandLineHost.pdb" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.EmuAutomationController.dll" target="tools\WindowsPhoneTestFramework.EmuAutomationController.dll" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.EmuAutomationController.pdb" target="tools\WindowsPhoneTestFramework.EmuAutomationController.pdb" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.EmuDriver.dll" target="tools\WindowsPhoneTestFramework.EmuDriver.dll" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.EmuDriver.pdb" target="tools\WindowsPhoneTestFramework.EmuDriver.pdb" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.Utils.dll" target="tools\WindowsPhoneTestFramework.Utils.dll" />
+    <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.Utils.pdb" target="tools\WindowsPhoneTestFramework.Utils.pdb" />
+    <file src="..\License.txt" target="License.txt" />
+    <file src="..\ReadMe.txt" target="ReadMe.txt" />
+  </files>
+</package>
