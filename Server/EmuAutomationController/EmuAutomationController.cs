@@ -90,6 +90,7 @@ namespace WindowsPhoneTestFramework.EmuAutomationController
             if (Driver != null)
             {
                 Driver.ReleaseDeviceConnection();
+                Driver = null;
             }
         }
 

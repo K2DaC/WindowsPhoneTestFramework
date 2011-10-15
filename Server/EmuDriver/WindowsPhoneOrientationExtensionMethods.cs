@@ -19,6 +19,9 @@ namespace WindowsPhoneTestFramework.EmuDriver
     {
         public static bool IsVisible(this RectangleF position, WindowsPhoneOrientation orientation)
         {
+            if (position.IsEmpty)
+                return false;
+
             var height = 0.0;
             var width = 0.0;
 
@@ -35,9 +38,6 @@ namespace WindowsPhoneTestFramework.EmuDriver
                 default:
                     throw new ArgumentException("unknown orientation " + orientation);
             }
-
-            if (position.IsEmpty)
-                return false;
 
             if (position.X + position.Width <= 0)
                 return false;
