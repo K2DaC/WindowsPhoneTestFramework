@@ -11,7 +11,7 @@
 
 using System;
 
-namespace WindowsPhoneTestFramework.EmuDriver
+namespace WindowsPhoneTestFramework.Utils
 {
     public class SimpleMessageEventArgs : EventArgs
     {

@@ -10,7 +10,6 @@
 // ------------------------------------------------------------------------
 
 using System;
-using WindowsPhoneTestFramework.EmuDriver;
 
 namespace WindowsPhoneTestFramework.Utils
 {

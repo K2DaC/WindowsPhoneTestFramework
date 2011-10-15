@@ -69,11 +69,13 @@ namespace WindowsPhoneTestFramework.EmuDriver
         {
             if (isDisposing)
             {
-                if (_device == null)
-                {
-                    ReleaseDeviceConnection();
-                }
+                // nothing special to do...
             }
+
+            // release the device regardless of whether or not we are disposing
+            ExceptionSafe.ExecuteConsoleWriteAnyException(
+                    ReleaseDeviceConnection, 
+                    "exception shutting down COM driver");
         }
 
         private Device _device;
@@ -115,8 +117,11 @@ namespace WindowsPhoneTestFramework.EmuDriver
 
         public void ReleaseDeviceConnection()
         {
-            _device.Disconnect();
-            _device = null;
+            if (_device != null)
+            {
+                _device.Disconnect();
+                _device = null;
+            }
         }
 
         public bool IsInstalled(Guid productId)
