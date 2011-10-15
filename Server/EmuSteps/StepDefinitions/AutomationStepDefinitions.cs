@@ -85,7 +85,7 @@ namespace WindowsPhoneTestFramework.EmuSteps.StepDefinitions
         public void ThenIDontSeeText(string contents)
         {
             var position = Emu.PhoneAutomationController.GetPositionOfText(contents);
-            AssertPositionIsVisible(position, contents);
+            AssertPositionIsNotVisible(position, contents);
         }
 
         [Then(@"I see the control ""([^\""]*)""$")]
@@ -129,6 +129,11 @@ namespace WindowsPhoneTestFramework.EmuSteps.StepDefinitions
 
             var phoneOrientation = Emu.DisplayInputController.GuessOrientation();
             return position.IsVisible(phoneOrientation);
+        }
+
+        private void AssertPositionIsNotVisible(RectangleF position, string textTest)
+        {
+            Assert.False(IsPositionVisible(position), "Position of is offscreen, text:'{0}', position:{1}", textTest, position);            
         }
 
         private void AssertPositionIsVisible(RectangleF position, string textTest)
