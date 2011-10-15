@@ -20,16 +20,16 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote {
     [System.Runtime.Serialization.DataContractAttribute(Name="CommandBase", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
         "oller.Commands")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.AutomationElementCommandBase))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.SetTextCommand))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.ClickCommand))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.TakePictureCommand))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.GetPositionCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.GetTextCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.GenericCommand))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.GetPositionCommand))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.SetTextCommand))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.TakePictureCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.SetFocusCommand))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.InvokeControlTapActionCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.LookForTextCommand))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.NullCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.ConfirmAliveCommand))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.NullCommand))]
     public partial class CommandBase : object, System.ComponentModel.INotifyPropertyChanged {
         
         private System.Guid IdField;
@@ -76,13 +76,13 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="AutomationElementCommandBase", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
         "oller.Commands")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.SetTextCommand))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.ClickCommand))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.TakePictureCommand))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.GetPositionCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.GetTextCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.GenericCommand))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.GetPositionCommand))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.SetTextCommand))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.TakePictureCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.SetFocusCommand))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.InvokeControlTapActionCommand))]
     public partial class AutomationElementCommandBase : WindowsPhoneTestFramework.AutomationClient.Remote.CommandBase {
         
         private WindowsPhoneTestFramework.AutomationClient.Remote.AutomationIdentifier AutomationIdentifierField;
@@ -103,38 +103,24 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SetTextCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetPositionCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
         "oller.Commands")]
-    public partial class SetTextCommand : WindowsPhoneTestFramework.AutomationClient.Remote.AutomationElementCommandBase {
+    public partial class GetPositionCommand : WindowsPhoneTestFramework.AutomationClient.Remote.AutomationElementCommandBase {
         
-        private string TextField;
+        private bool ReturnEmptyIfNotVisibleField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Text {
+        public bool ReturnEmptyIfNotVisible {
             get {
-                return this.TextField;
+                return this.ReturnEmptyIfNotVisibleField;
             }
             set {
-                if ((object.ReferenceEquals(this.TextField, value) != true)) {
-                    this.TextField = value;
-                    this.RaisePropertyChanged("Text");
+                if ((this.ReturnEmptyIfNotVisibleField.Equals(value) != true)) {
+                    this.ReturnEmptyIfNotVisibleField = value;
+                    this.RaisePropertyChanged("ReturnEmptyIfNotVisible");
                 }
             }
         }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ClickCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
-        "oller.Commands")]
-    public partial class ClickCommand : WindowsPhoneTestFramework.AutomationClient.Remote.AutomationElementCommandBase {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TakePictureCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
-        "oller.Commands")]
-    public partial class TakePictureCommand : WindowsPhoneTestFramework.AutomationClient.Remote.AutomationElementCommandBase {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -243,9 +229,31 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetPositionCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
+    [System.Runtime.Serialization.DataContractAttribute(Name="SetTextCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
         "oller.Commands")]
-    public partial class GetPositionCommand : WindowsPhoneTestFramework.AutomationClient.Remote.AutomationElementCommandBase {
+    public partial class SetTextCommand : WindowsPhoneTestFramework.AutomationClient.Remote.AutomationElementCommandBase {
+        
+        private string TextField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Text {
+            get {
+                return this.TextField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TextField, value) != true)) {
+                    this.TextField = value;
+                    this.RaisePropertyChanged("Text");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TakePictureCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
+        "oller.Commands")]
+    public partial class TakePictureCommand : WindowsPhoneTestFramework.AutomationClient.Remote.AutomationElementCommandBase {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -253,6 +261,13 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote {
     [System.Runtime.Serialization.DataContractAttribute(Name="SetFocusCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
         "oller.Commands")]
     public partial class SetFocusCommand : WindowsPhoneTestFramework.AutomationClient.Remote.AutomationElementCommandBase {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="InvokeControlTapActionCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
+        "oller.Commands")]
+    public partial class InvokeControlTapActionCommand : WindowsPhoneTestFramework.AutomationClient.Remote.AutomationElementCommandBase {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -279,16 +294,16 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="NullCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
+    [System.Runtime.Serialization.DataContractAttribute(Name="ConfirmAliveCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
         "oller.Commands")]
-    public partial class NullCommand : WindowsPhoneTestFramework.AutomationClient.Remote.CommandBase {
+    public partial class ConfirmAliveCommand : WindowsPhoneTestFramework.AutomationClient.Remote.CommandBase {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ConfirmAliveCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
+    [System.Runtime.Serialization.DataContractAttribute(Name="NullCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
         "oller.Commands")]
-    public partial class ConfirmAliveCommand : WindowsPhoneTestFramework.AutomationClient.Remote.CommandBase {
+    public partial class NullCommand : WindowsPhoneTestFramework.AutomationClient.Remote.CommandBase {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -356,13 +371,13 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ResultBase", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
         "oller.Results")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.TimeoutFailedResult))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.PictureResult))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.FailedResultBase))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.ExceptionFailedResult))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.ActionFailedResult))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.NotFoundFailedResult))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.ExceptionFailedResult))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.PictureResult))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.SuccessResult))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.TimeoutFailedResult))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.PositionResult))]
     public partial class ResultBase : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -393,18 +408,33 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TimeoutFailedResult", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
+    [System.Runtime.Serialization.DataContractAttribute(Name="PictureResult", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
         "oller.Results")]
-    public partial class TimeoutFailedResult : WindowsPhoneTestFramework.AutomationClient.Remote.ResultBase {
+    public partial class PictureResult : WindowsPhoneTestFramework.AutomationClient.Remote.ResultBase {
+        
+        private string EncodedPictureBytesField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EncodedPictureBytes {
+            get {
+                return this.EncodedPictureBytesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EncodedPictureBytesField, value) != true)) {
+                    this.EncodedPictureBytesField = value;
+                    this.RaisePropertyChanged("EncodedPictureBytes");
+                }
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="FailedResultBase", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
         "oller.Results")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.ExceptionFailedResult))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.ActionFailedResult))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.NotFoundFailedResult))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.ExceptionFailedResult))]
     public partial class FailedResultBase : WindowsPhoneTestFramework.AutomationClient.Remote.ResultBase {
         
         private string FailureTextField;
@@ -421,20 +451,6 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote {
                 }
             }
         }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ActionFailedResult", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
-        "oller.Results")]
-    public partial class ActionFailedResult : WindowsPhoneTestFramework.AutomationClient.Remote.FailedResultBase {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="NotFoundFailedResult", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
-        "oller.Results")]
-    public partial class NotFoundFailedResult : WindowsPhoneTestFramework.AutomationClient.Remote.FailedResultBase {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -476,24 +492,16 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PictureResult", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
+    [System.Runtime.Serialization.DataContractAttribute(Name="ActionFailedResult", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
         "oller.Results")]
-    public partial class PictureResult : WindowsPhoneTestFramework.AutomationClient.Remote.ResultBase {
-        
-        private string EncodedPictureBytesField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string EncodedPictureBytes {
-            get {
-                return this.EncodedPictureBytesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EncodedPictureBytesField, value) != true)) {
-                    this.EncodedPictureBytesField = value;
-                    this.RaisePropertyChanged("EncodedPictureBytes");
-                }
-            }
-        }
+    public partial class ActionFailedResult : WindowsPhoneTestFramework.AutomationClient.Remote.FailedResultBase {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="NotFoundFailedResult", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
+        "oller.Results")]
+    public partial class NotFoundFailedResult : WindowsPhoneTestFramework.AutomationClient.Remote.FailedResultBase {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -516,6 +524,13 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote {
                 }
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TimeoutFailedResult", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
+        "oller.Results")]
+    public partial class TimeoutFailedResult : WindowsPhoneTestFramework.AutomationClient.Remote.ResultBase {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

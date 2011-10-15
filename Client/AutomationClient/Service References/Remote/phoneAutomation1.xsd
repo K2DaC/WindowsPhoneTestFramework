@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationController.Results" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationController.Results" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8085/phoneAutomation?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:complexType name="TimeoutFailedResult">
+  <xs:complexType name="PictureResult">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:ResultBase">
-        <xs:sequence />
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EncodedPictureBytes" nillable="true" type="xs:string" />
+        </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="TimeoutFailedResult" nillable="true" type="tns:TimeoutFailedResult" />
+  <xs:element name="PictureResult" nillable="true" type="tns:PictureResult" />
   <xs:complexType name="ResultBase">
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="ser:guid" />
@@ -25,16 +27,17 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="FailedResultBase" nillable="true" type="tns:FailedResultBase" />
-  <xs:complexType name="PictureResult">
+  <xs:complexType name="ExceptionFailedResult">
     <xs:complexContent mixed="false">
-      <xs:extension base="tns:ResultBase">
+      <xs:extension base="tns:FailedResultBase">
         <xs:sequence>
-          <xs:element minOccurs="0" name="EncodedPictureBytes" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ExceptionMessage" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ExceptionType" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="PictureResult" nillable="true" type="tns:PictureResult" />
+  <xs:element name="ExceptionFailedResult" nillable="true" type="tns:ExceptionFailedResult" />
   <xs:complexType name="ActionFailedResult">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:FailedResultBase">
@@ -53,6 +56,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="SuccessResult" nillable="true" type="tns:SuccessResult" />
+  <xs:complexType name="TimeoutFailedResult">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResultBase">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TimeoutFailedResult" nillable="true" type="tns:TimeoutFailedResult" />
   <xs:complexType name="NotFoundFailedResult">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:FailedResultBase">
@@ -61,17 +72,6 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="NotFoundFailedResult" nillable="true" type="tns:NotFoundFailedResult" />
-  <xs:complexType name="ExceptionFailedResult">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:FailedResultBase">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="ExceptionMessage" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="ExceptionType" nillable="true" type="xs:string" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="ExceptionFailedResult" nillable="true" type="tns:ExceptionFailedResult" />
   <xs:complexType name="PositionResult">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:ResultBase">

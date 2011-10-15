@@ -60,7 +60,7 @@
     <Compile Include="IConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration.cs" />
-    <Compile Include="Remote\ClickCommand.cs" />
+    <Compile Include="Remote\InvokeControlTapActionCommand.cs" />
     <Compile Include="Remote\CommandBase.cs" />
     <Compile Include="Remote\ConfirmAliveCommand.cs" />
     <Compile Include="Remote\AutomationElementCommandBase.cs" />

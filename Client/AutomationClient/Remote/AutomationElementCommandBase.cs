@@ -19,28 +19,49 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote
 {
     public partial class AutomationElementCommandBase
     {
-        protected UIElement GetUIElement()
+        protected bool AutomationIdIsEmpty
+        {
+            get
+            {
+                return string.IsNullOrEmpty(AutomationIdentifier.AutomationName)
+                       && string.IsNullOrEmpty(AutomationIdentifier.ElementName)
+                       && string.IsNullOrEmpty(AutomationIdentifier.DisplayedText);
+            }
+        }
+
+        protected UIElement GetUIElement(bool sendNotFoundResultOnFail = true)
         {
             var element = AutomationElementFinder.FindElement(AutomationIdentifier);
             if (element == null)
             {
-                SendNotFoundResult();
+                if (sendNotFoundResultOnFail)
+                    SendNotFoundResult();
                 return null;
             }
 
             return element;
         }
 
-        protected FrameworkElement GetFrameworkElement()
+        protected FrameworkElement GetFrameworkElement(bool sendNotFoundResultOnFail = true)
         {
             var element = AutomationElementFinder.FindElement(AutomationIdentifier) as FrameworkElement;
             if (element == null)
             {
-                SendNotFoundResult();
+                if (sendNotFoundResultOnFail)
+                    SendNotFoundResult();
                 return null;
             }
 
             return element;
+        }
+
+        protected FrameworkElement GetApplicationRootVisual()
+        {
+            var rootVisual = (PhoneApplicationFrame)Application.Current.RootVisual;
+            if (rootVisual == null)
+                return null;
+
+            return rootVisual;
         }
     }
 }
