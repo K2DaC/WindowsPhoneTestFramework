@@ -55,13 +55,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfigFileBasedConfiguration.cs" />
+    <Compile Include="StepDefinitions\AutomationSystemStepDefinitions.cs" />
+    <Compile Include="StepDefinitions\AutomationWaitStepDefinitions.cs" />
     <Compile Include="ConfigurableDefinitionBase.cs" />
+    <Compile Include="StepDefinitions\DriverStepDefinitions.cs" />
     <Compile Include="EmuDefinitionBase.cs" />
-    <Compile Include="HookDefinitions.cs" />
+    <Compile Include="HookDefinitions\HookDefinitions.cs" />
     <Compile Include="IConfiguration.cs" />
+    <Compile Include="StepDefinitions\InputStepDefinitions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StepDefinitions.cs" />
+    <Compile Include="StepDefinitions\AutomationStepDefinitions.cs" />
     <Compile Include="StepFlowContextHelpers.cs" />
+    <Compile Include="StepFlowOutputHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -85,6 +90,7 @@
       <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

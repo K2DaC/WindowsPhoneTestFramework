@@ -9,36 +9,26 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 // ------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using TechTalk.SpecFlow;
 
-namespace WindowsPhoneTestFramework.EmuSteps
+namespace WindowsPhoneTestFramework.EmuSteps.HookDefinitions
 {
     [Binding]
-    public class HookDefinitions : EmuDefinitionBase
+    public class EmuHookDefinitions : EmuDefinitionBase
     {
-        public HookDefinitions()
+        public EmuHookDefinitions()
         {                
         }
 
-        public HookDefinitions(IConfiguration configuration)
+        public EmuHookDefinitions(IConfiguration configuration)
             : base(configuration)
         {                
         }
 
-        [BeforeScenario]
-        public void BeforeAnyScenario()
-        {
-
-        }
-
         [AfterScenario]
-        public void AfterAnyScenario()
+        public void AfterAnyScenarioMakeSureEmuIsDisposed()
         {
-            DisposeOfEmu();            
+            DisposeOfEmu();
         }
     }
 }

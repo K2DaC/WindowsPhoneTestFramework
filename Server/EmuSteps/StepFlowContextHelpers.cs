@@ -35,7 +35,7 @@ namespace WindowsPhoneTestFramework.EmuSteps
                     return emu;
 
                 emu = new EmuAutomationController.EmuAutomationController();
-                emu.Trace += (sender, args) => Console.WriteLine("----> " + args.Message);
+                emu.Trace += (sender, args) => StepFlowOutputHelpers.Write(args.Message);
                 emu.Start(
                     configuration.BindingAddress == null ? null : new Uri(configuration.BindingAddress),
                     configuration.AutomationIdentification);
