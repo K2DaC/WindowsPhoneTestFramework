@@ -10,6 +10,7 @@
 // ------------------------------------------------------------------------
 
 using System;
+using System.Threading;
 
 namespace WindowsPhoneTestFramework.AutomationClient.Remote
 {
@@ -31,7 +32,8 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote
             catch (Exception exception)
             {
                 SendExceptionFailedResult(exception);
-                throw;
+                if (exception is ThreadAbortException)
+                    throw;
             }
         }
 
