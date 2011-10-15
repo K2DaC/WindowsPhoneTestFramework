@@ -201,5 +201,26 @@ namespace WindowsPhoneTestFramework.AutomationClient
                 return false;
             });
         }
+
+        public static string GetTextForFrameworkElement(FrameworkElement frameworkElement)
+        {
+            foreach (var textName in StringPropertyNamesToTestForText)
+            {
+                var stringPropertyValue = GetElementProperty<string>(frameworkElement, textName);
+                if (!string.IsNullOrEmpty(stringPropertyValue))
+                   return stringPropertyValue;
+            }
+
+            foreach (var objectName in ObjectPropertyNamesToTestForText)
+            {
+                var objectPropertyValue = GetElementProperty<object>(frameworkElement, objectName);
+                if (objectPropertyValue != null
+                    && objectPropertyValue is string
+                    && !string.IsNullOrEmpty(objectPropertyValue.ToString()))
+                    return (string) objectPropertyValue;
+            }
+
+            return null;
+        }
     }
 }

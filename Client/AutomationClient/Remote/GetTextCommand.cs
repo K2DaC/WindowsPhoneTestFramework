@@ -15,35 +15,21 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote
     {
         protected override void DoImpl()
         {
-            var element = GetUIElement();
+            var element = GetFrameworkElement();
             if (element == null)
+            {
+                SendNotFoundResult();
                 return;
+            }
 
-            var text = AutomationElementFinder.GetElementProperty<string>(element, "Text");
+            var text =  AutomationElementFinder.GetTextForFrameworkElement(element);
             if (text != null)
             {
                 SendTextResult(text);
                 return;
             }
 
-            var password = AutomationElementFinder.GetElementProperty<string>(element, "Password");
-            if (password != null)
-            {
-                SendTextResult(password);
-                return;
-            }
-
-            var content = AutomationElementFinder.GetElementProperty<object>(element, "Content");
-            if (content != null)
-            {
-                if (content is string)
-                {
-                    SendTextResult(content.ToString());
-                    return;
-                }
-            }
-
-            // if text, password and content are all missing... then give up
+            // if text is missing... then give up
             SendNotFoundResult();
         }
     }
