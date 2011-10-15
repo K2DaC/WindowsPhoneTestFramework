@@ -1,5 +1,5 @@
 ﻿// ----------------------------------------------------------------------
-// <copyright file="ClickCommand.cs" company="Expensify">
+// <copyright file="InvokeControlTapActionCommand.cs" company="Expensify">
 //     (c) Copyright Expensify. http://www.expensify.com
 //     This source is subject to the Microsoft Public License (Ms-PL)
 //     Please see license.txt on https://github.com/Expensify/WindowsPhoneTestFramework
@@ -13,25 +13,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 
 namespace WindowsPhoneTestFramework.AutomationClient.Remote
 {
-    public partial class ClickCommand
+    public partial class InvokeControlTapActionCommand
     {
-        private static List<Func<AutomationPeer, bool>> PatternTesters;
+        public static readonly List<Func<AutomationPeer, bool>> PatternTesters;
+        public static readonly List<Func<UIElement, bool>> UIElementTesters;
 
-        static ClickCommand()
+        static InvokeControlTapActionCommand()
         {
             var providers =
-                from method in typeof (ClickCommand).GetMethods(BindingFlags.NonPublic | BindingFlags.Static)
+                from method in typeof (InvokeControlTapActionCommand).GetMethods(BindingFlags.NonPublic | BindingFlags.Static)
                 where method.ReturnType == typeof (bool)
                       && method.GetParameters().Length == 1
                       && method.GetParameters()[0].ParameterType == typeof (AutomationPeer)
                 select new Func<AutomationPeer,bool>((AutomationPeer peer) => (bool)method.Invoke(null, new object[] {peer}));
 
             PatternTesters = new List<Func<AutomationPeer, bool>>(providers);
+            UIElementTesters = new List<Func<UIElement, bool>>();
         }
         
         protected override void DoImpl()
@@ -51,6 +54,15 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote
             foreach (var patternTester in PatternTesters)
             {
                 if (patternTester(peer))
+                {
+                    SendSuccessResult();
+                    return;
+                }
+            }
+
+            foreach (var uiElementTester in UIElementTesters)
+            {
+                if (uiElementTester(element))
                 {
                     SendSuccessResult();
                     return;

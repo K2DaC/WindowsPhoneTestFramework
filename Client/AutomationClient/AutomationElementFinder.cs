@@ -10,6 +10,7 @@
 // ------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Reflection;
 using System.Windows;
@@ -26,6 +27,17 @@ namespace WindowsPhoneTestFramework.AutomationClient
 {
     public static class AutomationElementFinder
     {
+        public readonly static List<string> StringPropertyNamesToTestForText = new List<string>()
+                                                                       {
+                                                                            "Text",
+                                                                            "Password",
+                                                                            "Message"
+                                                                       };
+        public readonly static List<string> ObjectPropertyNamesToTestForText = new List<string>()
+                                                                       {
+                                                                            "Content"    
+                                                                       };
+
         public static UIElement FindElement(AutomationIdentifier identifier)
         {
             if (!string.IsNullOrEmpty(identifier.AutomationName))
@@ -168,22 +180,23 @@ namespace WindowsPhoneTestFramework.AutomationClient
                 if (frameworkElement.Opacity == 0.0)
                     return false;
 
-                var textPropertyValue = GetElementProperty<string>(frameworkElement, "Text");
-                if (!string.IsNullOrEmpty(textPropertyValue))
-                    if (textPropertyValue == displayedText)
-                        return true;
+                foreach (var textName in StringPropertyNamesToTestForText)
+                {
+                    var stringPropertyValue = GetElementProperty<string>(frameworkElement, textName);
+                    if (!string.IsNullOrEmpty(stringPropertyValue))
+                        if (stringPropertyValue == displayedText)
+                            return true;
+                }
 
-                var passwordPropertyValue = GetElementProperty<string>(frameworkElement, "Password");
-                if (!string.IsNullOrEmpty(passwordPropertyValue))
-                    if (passwordPropertyValue == displayedText)
-                        return true;
-
-                var contentPropertyValue = GetElementProperty<object>(frameworkElement, "Content");
-                if (contentPropertyValue != null
-                    && contentPropertyValue is string
-                    && !string.IsNullOrEmpty(contentPropertyValue.ToString()))
-                    if (contentPropertyValue.ToString() == displayedText)
-                        return true;
+                foreach (var objectName in ObjectPropertyNamesToTestForText)
+                {
+                    var objectPropertyValue = GetElementProperty<object>(frameworkElement, objectName);
+                    if (objectPropertyValue != null
+                        && objectPropertyValue is string
+                        && !string.IsNullOrEmpty(objectPropertyValue.ToString()))
+                        if (objectPropertyValue.ToString() == displayedText)
+                            return true;
+                }
 
                 return false;
             });

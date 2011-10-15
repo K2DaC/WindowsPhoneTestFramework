@@ -9,7 +9,10 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 // ------------------------------------------------------------------------
 
+using System;
 using System.Windows;
+using System.Windows.Automation.Peers;
+using WindowsPhoneTestFramework.AutomationClient.Remote;
 
 namespace WindowsPhoneTestFramework.AutomationClient
 {
@@ -29,7 +32,8 @@ namespace WindowsPhoneTestFramework.AutomationClient
 
             var configuration = new Configuration()
                                     {
-                                        RemoteUrl = remoteUrl,
+                                        RemoteUrl =
+                                            string.IsNullOrEmpty(remoteUrl) ? Configuration.DefaultRemoteUrl : remoteUrl,
                                         UiDispatcher = Application.Current.RootVisual.Dispatcher
                                     };
 
@@ -38,6 +42,26 @@ namespace WindowsPhoneTestFramework.AutomationClient
             Application.Current.Exit += (sender, args) => automationClient.Stop();
 
             _initialised = true;
+        }
+
+        public void AddStringPropertyNameForTextLookup(string propertyName)
+        {
+            AutomationElementFinder.StringPropertyNamesToTestForText.Add(propertyName);
+        }
+
+        public void AddObjectPropertyNameForTextLookup(string propertyName)
+        {
+            AutomationElementFinder.ObjectPropertyNamesToTestForText.Add(propertyName);
+        }
+
+        public void AddAutomationPeerHandlerForTapAction(Func<AutomationPeer, bool> handler)
+        {
+            InvokeControlTapActionCommand.PatternTesters.Insert(0, handler);
+        }
+
+        public void AddUIElementHandlerForTapAction(Func<UIElement, bool> handler)
+        {
+            InvokeControlTapActionCommand.UIElementTesters.Insert(0, handler);
         }
     }
 }
