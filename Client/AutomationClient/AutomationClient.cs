@@ -9,6 +9,9 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 // ------------------------------------------------------------------------
 
+// try to suppress annoying debugger exception reports - just can't get this to work cleanly - so not defined yet
+//#define USE_CONNECTION_CHECK_BEFORE_STARTING
+
 using System;
 using System.Diagnostics;
 using System.Net;
@@ -27,8 +30,10 @@ namespace WindowsPhoneTestFramework.AutomationClient
 {
     public class AutomationClient : IAutomationClient
     {
-        private const int GetNextCommandTimeoutInMilliseconds = 1000;
-        private const int ErrorSleepTimeoutInMilliseconds = 1000;
+        private const int GetNextCommandTimeoutInMilliseconds = 2000;
+        private const int ErrorSleepTimeoutInMilliseconds = 500;
+        private const int CheckServerSleepTimeoutInMilliseconds = 500;
+        private const int NullCommandSleepTimeoutInMilliseconds = 100;
 
         private readonly IConfiguration _configuration;
         private readonly ManualResetEvent _stopPlease;
@@ -64,28 +69,20 @@ namespace WindowsPhoneTestFramework.AutomationClient
 
         private void Run()
         {
+            bool isServerAvailable = true; // default to try to connect first time...
             while (_stopPlease.WaitOne(0) == false)
             {
                 try
                 {
-                    var serviceClient = _configuration.CreateClient();
+                    if (isServerAvailable)
+                        GetAndProcessNextCommand();
+#if USE_CONNECTION_CHECK_BEFORE_STARTING
+                    else
+                        isServerAvailable = _configuration.TestIfRemoteAvailable();
 
-                    var commandProcessed = new ManualResetEvent(false);
-                    serviceClient.GetNextCommandCompleted += (obj, args) =>
-                    {
-                        if (args.Error != null)
-                        {
-                            // TODO! Log something somehow!
-                        }
-                        else
-                        {
-                            ProcessNextCommand(args.Result);
-                        }
-                        commandProcessed.Set();
-                    };
-
-                    serviceClient.GetNextCommandAsync(GetNextCommandTimeoutInMilliseconds);
-                    commandProcessed.WaitOne();
+                    if (!isServerAvailable)
+                        Thread.Sleep(TimeSpan.FromMilliseconds(CheckServerSleepTimeoutInMilliseconds));
+#endif //USE_CONNECTION_CHECK_BEFORE_STARTING
                 }
                 catch (ThreadAbortException)
                 {
@@ -99,8 +96,33 @@ namespace WindowsPhoneTestFramework.AutomationClient
                                                   exception.GetType().FullName,
                                                   exception.Message));
                     Thread.Sleep(TimeSpan.FromMilliseconds(ErrorSleepTimeoutInMilliseconds));
+#if USE_CONNECTION_CHECK_BEFORE_STARTING
+                    isServerAvailable = false;
+#endif //USE_CONNECTION_CHECK_BEFORE_STARTING
                 }
             }
+        }
+
+        private void GetAndProcessNextCommand()
+        {
+            var serviceClient = _configuration.CreateClient();
+
+            var commandProcessed = new ManualResetEvent(false);
+            serviceClient.GetNextCommandCompleted += (obj, args) =>
+            {
+                if (args.Error != null)
+                {
+                    // TODO! Log something somehow!
+                }
+                else
+                {
+                    ProcessNextCommand(args.Result);
+                }
+                commandProcessed.Set();
+            };
+
+            serviceClient.GetNextCommandAsync(GetNextCommandTimeoutInMilliseconds);
+            commandProcessed.WaitOne();
         }
 
         private void ProcessNextCommand(CommandBase command)
@@ -120,6 +142,12 @@ namespace WindowsPhoneTestFramework.AutomationClient
                         mre.Set();
                     });
             mre.WaitOne();
+
+            if (command is NullCommand)
+            {
+                Thread.Sleep(NullCommandSleepTimeoutInMilliseconds);
+                return;
+            }
         }
     }
 }

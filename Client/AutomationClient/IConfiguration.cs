@@ -16,6 +16,7 @@ namespace WindowsPhoneTestFramework.AutomationClient
 {
     public interface IConfiguration
     {
+        bool TestIfRemoteAvailable();
         Dispatcher UiDispatcher { get; }
         PhoneAutomationServiceClient CreateClient();
     }
