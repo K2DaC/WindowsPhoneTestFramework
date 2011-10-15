@@ -9,13 +9,24 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 // ------------------------------------------------------------------------
 
+//use DEBUGGING_CLIENT_APP in order to allow you to debug command processing within a WP7 App
+//#define DEBUGGING_CLIENT_APP
+
 using System;
 
 namespace WindowsPhoneTestFramework.AutomationController.Interfaces
 {
     public static class Constants
     {
-        public static readonly TimeSpan DefaultWaitTimeout = TimeSpan.FromMinutes(1.0);
-        public static readonly TimeSpan DefaultSendTimeout = TimeSpan.FromMinutes(1.0);
+#if DEBUGGING_CLIENT_APP
+        public static readonly TimeSpan DefaultCommandWaitTimeout = TimeSpan.FromMinutes(5.0);
+        public static readonly TimeSpan DefaultCommandSendTimeout = TimeSpan.FromMinutes(5.0);
+#else // DEBUGGING_CLIENT_APP
+        public static readonly TimeSpan DefaultCommandWaitTimeout = TimeSpan.FromSeconds(10.0);
+        public static readonly TimeSpan DefaultCommandSendTimeout = TimeSpan.FromSeconds(3.0);
+#endif // DEBUGGING_CLIENT_APP
+
+        public static readonly TimeSpan DefaultConfirmAliveTimeout = TimeSpan.FromSeconds(30.0);
+        public static readonly TimeSpan DefaultWaitForClientAppActionTimeout = TimeSpan.FromSeconds(30.0);
     }
 }

@@ -32,30 +32,16 @@ namespace WindowsPhoneTestFramework.AutomationController
 
         #region IPhoneAutomationController
 
-        public bool ConfirmAlive()
+        public bool WaitIsAlive()
+        {
+            return WaitForTestSuccess(LookIsAlive, Constants.DefaultConfirmAliveTimeout);
+        }
+
+        public bool LookIsAlive()
         {
             var command = new ConfirmAliveCommand();
             var result = SyncExecuteCommand(command);
             return result is SuccessResult;
-        }
-
-        public bool WaitForText(string text)
-        {
-            return WaitForText(text, Constants.DefaultWaitTimeout);
-        }
-
-        public bool WaitForText(string text, TimeSpan timeout)
-        {
-            var start = DateTime.UtcNow;
-            while (DateTime.UtcNow - start < timeout)
-            {
-                if (LookForText(text))
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         public bool LookForText(string text)
@@ -65,43 +51,62 @@ namespace WindowsPhoneTestFramework.AutomationController
             return result is SuccessResult;
         }
 
-        public bool TryGetText(string controlId, out string text)
+        public bool WaitForText(string text)
         {
-            text = null;
-            var command = new GetTextCommand()
-                              {
-                                  AutomationIdentifier = CreateAutomationIdentifier(controlId)
-                              };
-            var result = SyncExecuteCommand(command);
-            var successResult = result as SuccessResult;
-            if (successResult == null)
-                return false;
-
-            text = successResult.ResultText;
-            return true;
+            return WaitForText(text, Constants.DefaultWaitForClientAppActionTimeout);
         }
 
-        public bool SetText(string controlId, string text)
+        public bool WaitForText(string text, TimeSpan timeout)
         {
-            var command = new SetTextCommand()
-                              {
-                                  AutomationIdentifier = CreateAutomationIdentifier(controlId),
-                                  Text = text
-                              };
-
-            var result = SyncExecuteCommand(command);
-            var successResult = result as SuccessResult;
-            return (successResult != null);
+            return WaitForTestSuccess(() => LookForText(text), timeout);
         }
 
-        public bool Click(string controlId)
+        public bool WaitForControlOrText(string textOrControlId)
         {
-            var command = new ClickCommand()
-                              {
-                                  AutomationIdentifier = CreateAutomationIdentifier(controlId)
-                              };
-            var result = SyncExecuteCommand(command);
-            return result is SuccessResult;
+            return WaitForControlOrText(textOrControlId, Constants.DefaultWaitForClientAppActionTimeout);
+        }
+
+        public bool WaitForControlOrText(string textOrControlId, TimeSpan timeout)
+        {
+            return WaitForTestSuccess(() => LookForControlOrText(textOrControlId), timeout);
+        }
+
+        public bool LookForControlOrText(string textOrControlId)
+        {
+            var automationIdentifier = CreateControlOrTextAutomationIdentifier(textOrControlId);
+            return LookForAutomationIdentifer(automationIdentifier);
+        }
+
+        public bool WaitForControl(string controlId)
+        {
+            return WaitForControl(controlId, Constants.DefaultWaitForClientAppActionTimeout);
+        }
+
+        public bool WaitForControl(string controlId, TimeSpan timeout)
+        {
+            return WaitForTestSuccess(() => LookForControl(controlId), timeout);
+        }
+
+        public bool LookForControl(string controlId)
+        {
+            var automationIdentifier = CreateAutomationIdentifier(controlId);
+            return LookForAutomationIdentifer(automationIdentifier);
+        }
+        
+        public bool TryGetTextFromControl(string controlId, out string text)
+        {
+            return TryGetTextFromAutomationIdentifier(CreateAutomationIdentifier(controlId), out text);
+        }
+
+        public bool SetTextOnControl(string controlId, string text)
+        {
+            return SetTextOnAutomationIdentification(CreateAutomationIdentifier(controlId), text);
+        }
+
+        public bool InvokeControlTapAction(string controlId)
+        {
+            var automationIdentifier = CreateAutomationIdentifier(controlId);
+            return InvokeControlTapActionAutomationIdentifer(automationIdentifier);
         }
 
         public bool TakePicture(string controlId, out Bitmap bitmap)
@@ -131,11 +136,26 @@ namespace WindowsPhoneTestFramework.AutomationController
             return TakePicture(null, out bitmap);
         }
 
-        public RectangleF GetPosition(string controlId)
+        public RectangleF GetPositionOfText(string text)
+        {
+            return GetPositionOfAutomationIdentifier(CreateTextOnlyAutomationIdentifier(text));
+        }
+
+        public RectangleF GetPositionOfControl(string controlId)
+        {
+            return GetPositionOfAutomationIdentifier(CreateAutomationIdentifier(controlId));
+        }
+
+        public RectangleF GetPositionOfControlOrText(string textOrControlId)
+        {
+            return GetPositionOfAutomationIdentifier(CreateControlOrTextAutomationIdentifier(textOrControlId));
+        }
+
+        private RectangleF GetPositionOfAutomationIdentifier(AutomationIdentifier automationIdentifier)
         {
             var command = new GetPositionCommand()
             {
-                AutomationIdentifier = CreateAutomationIdentifier(controlId)
+                AutomationIdentifier = automationIdentifier
             };
             var result = SyncExecuteCommand(command);
             var positionResult = result as PositionResult;
@@ -162,12 +182,35 @@ namespace WindowsPhoneTestFramework.AutomationController
 
         #region Private methods
 
+        private static AutomationIdentifier CreateTextOnlyAutomationIdentifier(string text)
+        {
+            return new AutomationIdentifier()
+                       {
+                           DisplayedText = text
+                       };
+        }
+
+        private AutomationIdentifier CreateControlOrTextAutomationIdentifier(string textOrControlId)
+        {
+            var toReturn = CreateAutomationIdentifier(textOrControlId);
+            toReturn.DisplayedText = textOrControlId;
+            return toReturn;
+        }
+            
         private AutomationIdentifier CreateAutomationIdentifier(string id)
         {
-            if (string.IsNullOrEmpty(id))
-                return null;
-
             return new AutomationIdentifier(id, _automationIdentification);
+        }
+
+        private bool LookForAutomationIdentifer(AutomationIdentifier automationIdentifier)
+        {
+            var command = new GetPositionCommand() { AutomationIdentifier = automationIdentifier, ReturnEmptyIfNotVisible = true };
+            var result = SyncExecuteCommand(command) as PositionResult;
+            if (result == null)
+                return false;
+
+            // check that position is not empty
+            return (result.Width + result.Height > 0.0);
         }
 
         private ResultBase SyncExecuteCommand(CommandBase command)
@@ -181,6 +224,60 @@ namespace WindowsPhoneTestFramework.AutomationController
                                     });
             manualResetEvent.WaitOne();
             return toReturn;
+        }
+
+        private static bool WaitForTestSuccess(Func<bool> test, TimeSpan timeout)
+        {
+            var start = DateTime.UtcNow;
+
+            do
+            {
+                if (test())
+                {
+                    return true;
+                }
+            } while (DateTime.UtcNow - start < timeout);
+
+            return false;
+        }
+
+        private bool InvokeControlTapActionAutomationIdentifer(AutomationIdentifier automationIdentifier)
+        {
+            var command = new InvokeControlTapActionCommand()
+            {
+                AutomationIdentifier = automationIdentifier
+            };
+            var result = SyncExecuteCommand(command);
+            return result is SuccessResult;
+        }
+
+        private bool SetTextOnAutomationIdentification(AutomationIdentifier automationIdentifier, string text)
+        {
+            var command = new SetTextCommand()
+            {
+                AutomationIdentifier = automationIdentifier,
+                Text = text
+            };
+
+            var result = SyncExecuteCommand(command);
+            var successResult = result as SuccessResult;
+            return (successResult != null);
+        }
+
+        private bool TryGetTextFromAutomationIdentifier(AutomationIdentifier automationIdentifier, out string text)
+        {
+            text = null;
+            var command = new GetTextCommand()
+            {
+                AutomationIdentifier = automationIdentifier
+            };
+            var result = SyncExecuteCommand(command);
+            var successResult = result as SuccessResult;
+            if (successResult == null)
+                return false;
+
+            text = successResult.ResultText;
+            return true;
         }
 
         #endregion

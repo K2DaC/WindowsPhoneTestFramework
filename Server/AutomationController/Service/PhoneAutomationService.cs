@@ -60,6 +60,8 @@ namespace WindowsPhoneTestFramework.AutomationController.Service
             KnownTypeProvider.RegisterDerivedTypesOf<ResultBase>(typeof(ResultBase).Assembly);
         }
 
+        public bool Verbose { get; set; }
+
         public PhoneAutomationService()
         {
             Clear();
@@ -130,7 +132,8 @@ namespace WindowsPhoneTestFramework.AutomationController.Service
                     _commandAvailableEvent.Reset();
                     _state = State.CommandSent;
                     _timeCommandSent = DateTime.UtcNow;
-                    InvokeTrace("Command sent to client");
+                    if (Verbose)
+                        InvokeTrace("Command sent to client");
                     return _currentCommand;
                 }
             }
@@ -170,7 +173,8 @@ namespace WindowsPhoneTestFramework.AutomationController.Service
                     return;
                 }
 
-                InvokeTrace("Result from client received - processing...");
+                if (Verbose)
+                    InvokeTrace("Result from client received - processing...");
                 InvokeCallbackAndClear(result);
             }
         }

@@ -50,7 +50,7 @@
     <Compile Include="Interfaces\AutomationIdentification.cs" />
     <Compile Include="Results\PositionResult.cs" />
     <Compile Include="ServiceHostController.cs" />
-    <Compile Include="Commands\ClickCommand.cs" />
+    <Compile Include="Commands\InvokeControlTapActionCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\ConfirmAliveCommand.cs" />
     <Compile Include="Commands\GenericCommand.cs" />
