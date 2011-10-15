@@ -10,6 +10,7 @@
 // ------------------------------------------------------------------------
 
 using System;
+using System.IO;
 
 namespace WindowsPhoneTestFramework.EmuSteps
 {
@@ -17,7 +18,12 @@ namespace WindowsPhoneTestFramework.EmuSteps
     {
         public static void Write(string message, params object[] args)
         {
-            Console.WriteLine(string.Format("----> " + message, args));
+            Console.WriteLine(string.Format("         -> " + message, args));
+        }
+
+        public static void WriteException(string message, Exception exception)
+        {
+            Write("Exception : {0} : {1} : {2}", message, exception.GetType().FullName, exception.Message);
         }
     }
 }
