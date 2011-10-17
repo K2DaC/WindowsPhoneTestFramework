@@ -27,7 +27,7 @@ namespace WindowsPhoneTestFramework.EmuDriver
             set;
         }
 
-        public string WpDeviceName { get; private set; }
+        public string WpDeviceNameBase { get; private set; }
 
         public bool TryConnect()
         {
@@ -48,10 +48,10 @@ namespace WindowsPhoneTestFramework.EmuDriver
             return false;
         }
 
-        public DriverBase(string deviceName)
+        public DriverBase(string deviceNameBase)
         {
-            WpSdkName =  "Windows Phone 7";
-            WpDeviceName = deviceName;
+            WpSdkName = "Windows Phone 7";
+            WpDeviceNameBase = deviceNameBase;
         }
 
         ~DriverBase()
@@ -74,7 +74,7 @@ namespace WindowsPhoneTestFramework.EmuDriver
 
             // release the device regardless of whether or not we are disposing
             ExceptionSafe.ExecuteConsoleWriteAnyException(
-                    ReleaseDeviceConnection, 
+                    ReleaseDeviceConnection,
                     "exception shutting down COM driver");
         }
 
@@ -100,10 +100,27 @@ namespace WindowsPhoneTestFramework.EmuDriver
                 InvokeTrace("platform '{0}' found", WpSdkName);
 
                 // find the device
-                InvokeTrace(string.Format("looking for device '{0}'", WpDeviceName));
+                InvokeTrace(string.Format("looking for device '{0}'", WpDeviceNameBase));
                 var devices = phoneSdk.GetDevices();
                 InvokeTrace(string.Format("{0} devices found", devices.Count));
-                var device = phoneSdk.GetDevices().Single(d => d.Name == WpDeviceName);
+                var device = phoneSdk.GetDevices().FirstOrDefault(d => d.Name == WpDeviceNameBase);
+
+                if (device == null)
+                {
+                    InvokeTrace("device {0} not found - looking for similar matches", WpDeviceNameBase);
+                    device = phoneSdk.GetDevices().FirstOrDefault(d => d.Name.StartsWith(WpDeviceNameBase));
+                }
+
+                if (device == null)
+                {
+                    InvokeTrace("device {0} not found - and no similar matches found", WpDeviceNameBase);
+                    InvokeTrace("available devices were", WpDeviceNameBase);
+                    foreach (var d in phoneSdk.GetDevices())
+                        InvokeTrace("    " + d.Name);
+
+                    // TODO - need a better exception than this!
+                    throw new ApplicationException("Aborting - could not find device " + device);
+                }
 
                 // make the connection
                 InvokeTrace("connecting to device...");
@@ -142,7 +159,7 @@ namespace WindowsPhoneTestFramework.EmuDriver
 
         public InstallationResult Install(Guid productId, string applicationName, string applicationIconPath, string applicationXapPath)
         {
-            return Install(productId, productId, applicationName, applicationIconPath, applicationXapPath);    
+            return Install(productId, productId, applicationName, applicationIconPath, applicationXapPath);
         }
 
         public InstallationResult Install(Guid productId, Guid instanceId, string applicationName, string applicationIconPath, string applicationXapPath)

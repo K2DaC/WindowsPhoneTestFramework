@@ -14,6 +14,9 @@ namespace WindowsPhoneTestFramework.EmuDriver
     public class EmulatorDriver : DriverBase
     {
         public EmulatorDriver()
+            // this name should work for both English and non-English SDKs
+            // e.g. Windows Phone Emulator
+            // e.g. Windows Phone Emulator(DE)
             : base("Windows Phone Emulator")
         {            
             DisplayInputController = new EmulatorDisplayInputController();
