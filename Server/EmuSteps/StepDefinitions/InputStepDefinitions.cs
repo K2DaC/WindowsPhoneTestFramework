@@ -9,6 +9,7 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 // ------------------------------------------------------------------------
 
+using System;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 using WindowsPhoneTestFramework.EmuDriver;
@@ -52,6 +53,20 @@ namespace WindowsPhoneTestFramework.EmuSteps.StepDefinitions
         public void ThenIGoBack()
         {
             Emu.DisplayInputController.PressHardwareButton(WindowsPhoneHardwareButton.Back);
+        }
+
+        [Then(@"I go home")]
+        public void ThenIGoHome()
+        {
+            Emu.DisplayInputController.PressHardwareButton(WindowsPhoneHardwareButton.Home);
+        }
+
+        [Then(@"I press hardware button ""([^\""]*)""$")]
+        public void ThenIPressHardwareButton(string whichButton)
+        {
+            WindowsPhoneHardwareButton parsedButton;
+            Assert.IsTrue(Enum.TryParse(whichButton, true, out parsedButton), "failed to parse button name " + whichButton);
+            Emu.DisplayInputController.PressHardwareButton(parsedButton);
         }
 
         // /^I click on screen (\d+)% from the left and (\d+)% from the top$/

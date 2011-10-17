@@ -97,11 +97,18 @@ namespace WindowsPhoneTestFramework.EmuSteps.StepDefinitions
             Assert.IsTrue(ping, "App not alive - ping failed");
         }
 
+        [Then("I start my app")]
+        public void ThenIStartMyApp()
+        {
+            var start = Emu.Driver.Start(Configuration.ProductId);
+            Assert.That(start == StartResult.Success, "failed to start my app - result " + start);
+        }
+
         [Then(@"my app is not running")]
         public void ThenMyAppIsNotAlive()
         {
             var ping = Emu.PhoneAutomationController.LookIsAlive();
-            Assert.IsFalse(ping, "App was alive - ping succeeeded");
+            Assert.IsFalse(ping, "App was alive - ping succeeded");
         }
     }
 }
