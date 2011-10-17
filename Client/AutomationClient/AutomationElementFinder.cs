@@ -207,7 +207,7 @@ namespace WindowsPhoneTestFramework.AutomationClient
             foreach (var textName in StringPropertyNamesToTestForText)
             {
                 var stringPropertyValue = GetElementProperty<string>(frameworkElement, textName);
-                if (!string.IsNullOrEmpty(stringPropertyValue))
+                if (stringPropertyValue != null)
                    return stringPropertyValue;
             }
 
@@ -215,8 +215,7 @@ namespace WindowsPhoneTestFramework.AutomationClient
             {
                 var objectPropertyValue = GetElementProperty<object>(frameworkElement, objectName);
                 if (objectPropertyValue != null
-                    && objectPropertyValue is string
-                    && !string.IsNullOrEmpty(objectPropertyValue.ToString()))
+                    && objectPropertyValue is string)
                     return (string) objectPropertyValue;
             }
 
