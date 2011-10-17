@@ -1,5 +1,4 @@
-WindowsPhoneTestFramework
-=========================
+#WindowsPhoneTestFramework
 
 There is an introduction video on 
 
@@ -10,8 +9,7 @@ There are some Wiki Pages now on
 			https://github.com/Expensify/WindowsPhoneTestFramework/wiki
 
 			
-General setup
--------------
+##General setup
 
 For adding BDD to a class library project, see:
 
@@ -22,8 +20,7 @@ For adding the test client to a WP7 project, see:
 			https://github.com/Expensify/WindowsPhoneTestFramework/wiki/Adding-testing-to-an-application
 
 			
-NuGet setup - wp7 app
----------------------
+##NuGet setup - wp7 app
 
 If you have installed from NuGet into your WP7 App, then:
 
@@ -64,8 +61,7 @@ If you have installed from NuGet into your test class library, then:
 4. Run the tests
 
 
-Prerequisites
--------------
+#Prerequisites
 
 To get this to work, you need to install:
 
@@ -76,7 +72,12 @@ To get this to work, you need to install:
 - specflow
 
 
-Some possible problems:
+#Some possible problems:
+
+- For non-English setups (outside of US, UK, AU, etc) you may find you are not able to create the emulator - this is due to internationalised emulator device names (currently I'm looking for a list).
+
+	There is now some code to help work around this - but if the emulator does not start in your SDK, then please get in touch.
+	If you want to try fixing this yourselves, take a look at the device name in DriverBase.cs and EmulatorDriver.cs
 
 - For some script runners, then you may need to change script runner to have the 32-big flag set - try to find a 32-bit alternative (e.g. nunit-console-x86.exe) - or (at worst) use CorFlags.exe to change your test-runner.
 
@@ -87,8 +88,7 @@ Some possible problems:
      netsh http add urlacl url=http://+:8085/ user=<domain>\<user>
 
 	 
-Source code build
------------------
+#Source code build
 
 To start:
 
@@ -107,8 +107,7 @@ To start:
 	doSwipe LeftToRight
 
 	
-Source code - using the test platform
--------------------------------------
+#Source code - using the test platform
 
 To work out how to use the test platform in your own apps:
 
@@ -117,12 +116,11 @@ To work out how to use the test platform in your own apps:
 2. Try looking at the gherkin code in the ExampleApp.Spec features
 
 
-Questions
----------
+#Questions
 
 Please ask them on http://www.stackoverflow.com
 
-Contributing
-------------
+
+#Contributing
 
 Please do dive on in and help :)
