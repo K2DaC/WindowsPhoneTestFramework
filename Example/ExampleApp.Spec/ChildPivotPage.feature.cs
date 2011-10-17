@@ -78,6 +78,8 @@ namespace ExampleApp.Spec
     testRunner.Then("I press the control \"Go!\"");
 #line 11
     testRunner.Then("I wait for the text \"item1\" to appear");
+#line 12
+    testRunner.And("take a picture");
 #line hidden
         }
         
@@ -86,13 +88,13 @@ namespace ExampleApp.Spec
         public virtual void PivotPageFieldsAreEmptyAtStart()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Pivot Page fields are empty at start", ((string[])(null)));
-#line 13
-this.ScenarioSetup(scenarioInfo);
 #line 14
-    testRunner.Then("I see the control \"TextBoxInput\" contains \"\"");
+this.ScenarioSetup(scenarioInfo);
 #line 15
-    testRunner.And("I see the control \"TextBoxOutput\" contains \"\"");
+    testRunner.Then("I see the control \"TextBoxInput\" contains \"\"");
 #line 16
+    testRunner.And("I see the control \"TextBoxOutput\" contains \"\"");
+#line 17
     testRunner.And("take a picture");
 #line hidden
             this.ScenarioCleanup();
@@ -103,21 +105,21 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ThePivotPageOutputFieldReversesWhatITypeInInput()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The Pivot Page output field reverses what I type in input", ((string[])(null)));
-#line 18
-this.ScenarioSetup(scenarioInfo);
 #line 19
-    testRunner.Then("I see the control \"TextBoxInput\" contains \"\"");
+this.ScenarioSetup(scenarioInfo);
 #line 20
-    testRunner.And("I see the control \"TextBoxOutput\" contains \"\"");
+    testRunner.Then("I see the control \"TextBoxInput\" contains \"\"");
 #line 21
-    testRunner.And("take a picture");
+    testRunner.And("I see the control \"TextBoxOutput\" contains \"\"");
 #line 22
-    testRunner.Then("I enter \"Hello World\" into the control \"TextBoxInput\"");
+    testRunner.And("take a picture");
 #line 23
-    testRunner.Then("I see the control \"TextBoxInput\" contains \"Hello World\"");
+    testRunner.Then("I enter \"Hello World\" into the control \"TextBoxInput\"");
 #line 24
-    testRunner.And("I see the control \"TextBoxOutput\" contains \"dlroW olleH\"");
+    testRunner.Then("I see the control \"TextBoxInput\" contains \"Hello World\"");
 #line 25
+    testRunner.And("I see the control \"TextBoxOutput\" contains \"dlroW olleH\"");
+#line 26
     testRunner.Then("take a picture");
 #line hidden
             this.ScenarioCleanup();
@@ -128,25 +130,25 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AnExampleBrokenTest()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("An example broken test", ((string[])(null)));
-#line 27
-this.ScenarioSetup(scenarioInfo);
 #line 28
-    testRunner.Then("I see the control \"TextBoxInput\" contains \"\"");
+this.ScenarioSetup(scenarioInfo);
 #line 29
-    testRunner.And("I see the control \"TextBoxOutput\" contains \"\"");
+    testRunner.Then("I see the control \"TextBoxInput\" contains \"\"");
 #line 30
-    testRunner.And("take a picture");
+    testRunner.And("I see the control \"TextBoxOutput\" contains \"\"");
 #line 31
-    testRunner.Then("I press the control \"BreakThingsCheckBox\"");
-#line 32
     testRunner.And("take a picture");
+#line 32
+    testRunner.Then("I press the control \"BreakThingsCheckBox\"");
 #line 33
-    testRunner.Then("I enter \"Hello World\" into the control \"TextBoxInput\"");
+    testRunner.And("take a picture");
 #line 34
-    testRunner.Then("I see the control \"TextBoxInput\" contains \"Hello World\"");
+    testRunner.Then("I enter \"Hello World\" into the control \"TextBoxInput\"");
 #line 35
-    testRunner.Then("take a picture");
+    testRunner.Then("I see the control \"TextBoxInput\" contains \"Hello World\"");
 #line 36
+    testRunner.Then("take a picture");
+#line 37
     testRunner.And("I see the control \"TextBoxOutput\" contains \"dlroW olleH\"");
 #line hidden
             this.ScenarioCleanup();
@@ -157,43 +159,49 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ThePivotPageHasAPivotWhichRespondsToSwipes()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The Pivot Page has a Pivot which responds to swipes", ((string[])(null)));
-#line 38
-this.ScenarioSetup(scenarioInfo);
 #line 39
-    testRunner.Then("I see the control \"item1\" is left of the control \"item2\"");
+this.ScenarioSetup(scenarioInfo);
 #line 40
-    testRunner.And("I see the control \"item2\" is left of the control \"item3\"");
+    testRunner.Then("I see the control \"item1\" is left of the control \"item2\"");
 #line 41
+    testRunner.And("I see the control \"item2\" is left of the control \"item3\"");
+#line 42
     testRunner.And("I see \"Input\"");
-#line 44
-    testRunner.Then("I swipe \"RightToLeft\"");
 #line 45
-    testRunner.And("I wait 2 seconds");
-#line 46
-    testRunner.Then("I see the control \"item2\" is left of the control \"item3\"");
-#line 47
-    testRunner.And("I see the control \"item3\" is left of the control \"item1\"");
-#line 49
-    testRunner.And("I see the text \"You are on pivot 2\"");
-#line 51
     testRunner.Then("I swipe \"RightToLeft\"");
-#line 52
+#line 46
     testRunner.And("I wait 2 seconds");
-#line 53
-    testRunner.Then("I see the control \"item3\" is left of the control \"item1\"");
-#line 54
-    testRunner.And("I see the control \"item1\" is left of the control \"item2\"");
-#line 57
-    testRunner.And("I see the text \"You are on pivot 3\"");
-#line 58
-    testRunner.Then("I swipe \"LeftToRight\"");
-#line 59
-    testRunner.And("I wait 2 seconds");
-#line 60
+#line 47
+    testRunner.And("take a picture");
+#line 48
     testRunner.Then("I see the control \"item2\" is left of the control \"item3\"");
-#line 61
+#line 49
     testRunner.And("I see the control \"item3\" is left of the control \"item1\"");
+#line 51
+    testRunner.And("I see the text \"You are on pivot 2\"");
+#line 53
+    testRunner.Then("I swipe \"RightToLeft\"");
+#line 54
+    testRunner.And("I wait 2 seconds");
+#line 55
+    testRunner.And("take a picture");
+#line 56
+    testRunner.Then("I see the control \"item3\" is left of the control \"item1\"");
+#line 57
+    testRunner.And("I see the control \"item1\" is left of the control \"item2\"");
+#line 60
+    testRunner.And("I see the text \"You are on pivot 3\"");
+#line 61
+    testRunner.Then("I swipe \"LeftToRight\"");
+#line 62
+    testRunner.And("I wait 2 seconds");
 #line 63
+    testRunner.And("take a picture");
+#line 64
+    testRunner.Then("I see the control \"item2\" is left of the control \"item3\"");
+#line 65
+    testRunner.And("I see the control \"item3\" is left of the control \"item1\"");
+#line 67
     testRunner.And("I see the text \"You are on pivot 2\"");
 #line hidden
             this.ScenarioCleanup();
@@ -204,21 +212,21 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void BackButtonWorksOnPivotPage()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Back button works on Pivot Page", ((string[])(null)));
-#line 66
-this.ScenarioSetup(scenarioInfo);
-#line 67
-    testRunner.Then("I go back");
-#line 68
- testRunner.And("I wait 2 seconds");
-#line 69
- testRunner.Then("take a picture");
 #line 70
- testRunner.And("I see the text \"page name\"");
+this.ScenarioSetup(scenarioInfo);
 #line 71
     testRunner.Then("I go back");
 #line 72
  testRunner.And("I wait 2 seconds");
 #line 73
+ testRunner.Then("take a picture");
+#line 74
+ testRunner.And("I see the text \"page name\"");
+#line 75
+    testRunner.Then("I go back");
+#line 76
+ testRunner.And("I wait 2 seconds");
+#line 77
  testRunner.Then("my app is not running");
 #line hidden
             this.ScenarioCleanup();

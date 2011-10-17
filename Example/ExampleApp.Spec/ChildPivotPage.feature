@@ -9,6 +9,7 @@ Background:
     Then I wait for the text "Go!" to appear
     Then I press the control "Go!"
     Then I wait for the text "item1" to appear
+    And take a picture
 
 Scenario: Pivot Page fields are empty at start
     Then I see the control "TextBoxInput" contains ""
@@ -43,6 +44,7 @@ Scenario: The Pivot Page has a Pivot which responds to swipes
     #And I don't see "You are on pivot 3"
     Then I swipe "RightToLeft"
     And I wait 2 seconds
+    And take a picture
     Then I see the control "item2" is left of the control "item3"
     And I see the control "item3" is left of the control "item1"
     #And I don't see "Input"
@@ -50,6 +52,7 @@ Scenario: The Pivot Page has a Pivot which responds to swipes
     #And I don't see "You are on pivot 3"
     Then I swipe "RightToLeft"
     And I wait 2 seconds
+    And take a picture
     Then I see the control "item3" is left of the control "item1"
     And I see the control "item1" is left of the control "item2"
     #And I don't see "Input"
@@ -57,6 +60,7 @@ Scenario: The Pivot Page has a Pivot which responds to swipes
     And I see the text "You are on pivot 3"
     Then I swipe "LeftToRight"
     And I wait 2 seconds
+    And take a picture
     Then I see the control "item2" is left of the control "item3"
     And I see the control "item3" is left of the control "item1"
     #And I don't see "Input"
