@@ -26,8 +26,10 @@ Provides a SpecFlow testing framework for Windows Phone apps within the emulator
   <files>
     <file src="app.config.transform" target="content\app.config.transform" />
     <file src="..\CommandLine\EmuHost\bin\release\WindowsInput.dll" target="lib\net40\WindowsInput.dll" />
+	<!--
     <file src="..\CommandLine\EmuHost\bin\release\WindowsInput.pdb" target="lib\net40\WindowsInput.pdb" />
     <file src="..\CommandLine\EmuHost\bin\release\WindowsInput.xml" target="lib\net40\WindowsInput.xml" />
+	-->
     <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.AutomationController.dll" target="lib\net40\WindowsPhoneTestFramework.AutomationController.dll" />
     <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.AutomationController.pdb" target="lib\net40\WindowsPhoneTestFramework.AutomationController.pdb" />
     <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.EmuAutomationController.dll" target="lib\net40\WindowsPhoneTestFramework.EmuAutomationController.dll" />
@@ -50,8 +52,10 @@ Provides a SpecFlow testing framework for Windows Phone apps within the emulator
     <file src="..\CommandLine\EmuHost\bin\release\EmuHost.exe" target="tools\EmuHost.exe" />
     <file src="..\CommandLine\EmuHost\bin\release\EmuHost.pdb" target="tools\EmuHost.pdb" />
     <file src="..\CommandLine\EmuHost\bin\release\WindowsInput.dll" target="tools\WindowsInput.dll" />
+<!--	
     <file src="..\CommandLine\EmuHost\bin\release\WindowsInput.pdb" target="tools\WindowsInput.pdb" />
     <file src="..\CommandLine\EmuHost\bin\release\WindowsInput.xml" target="tools\WindowsInput.xml" />
+-->	
     <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.AutomationController.dll" target="tools\WindowsPhoneTestFramework.AutomationController.dll" />
     <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.AutomationController.pdb" target="tools\WindowsPhoneTestFramework.AutomationController.pdb" />
     <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.CommandLineHost.dll" target="tools\WindowsPhoneTestFramework.CommandLineHost.dll" />
@@ -63,6 +67,6 @@ Provides a SpecFlow testing framework for Windows Phone apps within the emulator
     <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.Utils.dll" target="tools\WindowsPhoneTestFramework.Utils.dll" />
     <file src="..\CommandLine\EmuHost\bin\release\WindowsPhoneTestFramework.Utils.pdb" target="tools\WindowsPhoneTestFramework.Utils.pdb" />
     <file src="..\License.txt" target="License.txt" />
-    <file src="..\ReadMe.txt" target="ReadMe.txt" />
+    <file src="..\ReadMe.md" target="ReadMe.md" />
   </files>
 </package>
