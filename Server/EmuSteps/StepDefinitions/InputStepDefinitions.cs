@@ -29,20 +29,20 @@ namespace WindowsPhoneTestFramework.EmuSteps.StepDefinitions
         {
         }
 
-        [Then(@"I swipe ""([^\""]*)""$")]
-        public void ThenISwipe(string swipeDirection)
+        [Then(@"I flick ""([^\""]*)""$")]
+        public void ThenIFlick(string flickDirection)
         {
             IGesture gesture = null;
-            switch (swipeDirection)
+            switch (flickDirection)
             {
                 case "LeftToRight":
-                    gesture = SwipeGesture.LeftToRightPortrait();
+                    gesture = FlickGesture.LeftToRightPortrait();
                     break;
                 case "RightToLeft":
-                    gesture = SwipeGesture.RightToLeftPortrait();
+                    gesture = FlickGesture.RightToLeftPortrait();
                     break;
                 default:
-                    Assert.Fail("Unknown swipe " + swipeDirection);
+                    Assert.Fail("Unknown flick " + flickDirection);
                     break;
             }
 
@@ -55,10 +55,10 @@ namespace WindowsPhoneTestFramework.EmuSteps.StepDefinitions
             Emu.DisplayInputController.PressHardwareButton(WindowsPhoneHardwareButton.Back);
         }
 
-        [Then(@"I longpress the backbutton")]
-        public void ThenILongPressBack()
+        [Then(@"I press the back button for (\d+) seconds")]
+        public void ThenILongPressBack(int timeInSeconds)
         {
-            Emu.DisplayInputController.LongpressHardwareButton(WindowsPhoneHardwareButton.Back);
+            Emu.DisplayInputController.LongPressHardwareButton(WindowsPhoneHardwareButton.Back, TimeSpan.FromSeconds(timeInSeconds));
         }
 
         [Then(@"I go home")]
@@ -75,13 +75,21 @@ namespace WindowsPhoneTestFramework.EmuSteps.StepDefinitions
             Emu.DisplayInputController.PressHardwareButton(parsedButton);
         }
 
-        [Then(@"I click on the middle of the screen")]
+        [Then(@"I tap on the middle of the screen")]
         public void ThenITapOnPosition() 
         {
-            IGesture gesture = TapGesture.TapOnPosition(240,400);
+            var orientation = Emu.DisplayInputController.GuessOrientation();
+            var screenMiddle = orientation.ScreenMiddle();
+            IGesture gesture = TapGesture.TapOnPosition(screenMiddle.X, screenMiddle.Y);
             Emu.DisplayInputController.DoGesture(gesture);
         }
-        // /^I click on screen (\d+)% from the left and (\d+)% from the top$/
+
+        [Then(@"/^I tap on screen (\d+) from the left and (\d+) from the top$/")]
+        public void ThenITapOnPosition(int x, int y)
+        {
+            IGesture gesture = TapGesture.TapOnPosition(x, y);
+            Emu.DisplayInputController.DoGesture(gesture);
+        }
 
         // /^I press "([^\"]*)"$/
 
