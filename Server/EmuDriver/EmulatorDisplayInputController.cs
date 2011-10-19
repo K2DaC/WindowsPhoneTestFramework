@@ -28,6 +28,8 @@ namespace WindowsPhoneTestFramework.EmuDriver
 
         // pauses
         private static readonly TimeSpan DefaultPauseDurationAfterAction = TimeSpan.FromMilliseconds(100.0);
+        private static readonly TimeSpan LongPressPauseDurationAfterAction = TimeSpan.FromMilliseconds(2000.0);
+        private static readonly TimeSpan DefaultTapDuration = TimeSpan.FromMilliseconds(500.0);
         public TimeSpan PauseDurationAfterSendingKeyPress { get; set; }
         public TimeSpan PauseDurationAfterSettingForegroundWindow { get; set; }
         public TimeSpan PauseDurationAfterPerformingGesture { get; set; }
@@ -109,11 +111,26 @@ namespace WindowsPhoneTestFramework.EmuDriver
             SendKeyPress(HardwareButtonToKeyCode(whichHardwareButton));
         }
 
+        public void LongpressHardwareButton(WindowsPhoneHardwareButton whichHardwareButton) 
+        {
+            SendKeyLongPress(HardwareButtonToKeyCode(whichHardwareButton));
+        }
+
         public void DoGesture(IGesture gesture)
         {
             gesture.Perform(this);
             Pause(PauseDurationAfterPerformingGesture);
         }
+
+        public void PerformMouseDownUp(Point point) 
+        {
+            _inputSimulator.Mouse.MoveMouseTo(point.X, point.Y);
+            _inputSimulator.Mouse.LeftButtonDown();
+            Pause(DefaultTapDuration);
+            _inputSimulator.Mouse.LeftButtonUp();
+        }
+
+        
 
         public void PerformMouseDownMoveUp(IEnumerable<Point> points, TimeSpan periodBetweenPoints)
         {
@@ -134,7 +151,7 @@ namespace WindowsPhoneTestFramework.EmuDriver
                 Pause(periodBetweenPoints);
             }
 
-            var endPoint = array.First();
+            var endPoint = array.Last();
             _inputSimulator.Mouse.MoveMouseTo(endPoint.X, endPoint.Y);
             _inputSimulator.Mouse.LeftButtonUp();
         }
@@ -148,23 +165,25 @@ namespace WindowsPhoneTestFramework.EmuDriver
             return GuessOrientation(rect);
         }
 
+        public Point TranslatePhonePositionToHostPosition(Point point)
+        {
+             var rect = NativeMethods.GetWindowRectangle(EmulatorWindowClassName, EmulatorWindowWindowName);
+             if (rect.IsEmpty)
+                throw new ManipulationFailedException("Failed to get emulator window rectangle");
+            var screenRect = NativeMethods.GetDesktopRectangle();
+            var emulatorScaleRatio = EstimateScaleRatio(rect);
+            return new Point()
+            {
+                X = (int)(VirtualScreenWidth * (rect.X + emulatorScaleRatio * point.X) / screenRect.Width),
+                Y = (int)(VirtualScreenHeight * (rect.Y + emulatorScaleRatio * point.Y) / screenRect.Height)
+            };
+        }
 
         public IEnumerable<Point> TranslatePhonePositionsToHostPositions(IEnumerable<Point> points)
         {
-            var rect = NativeMethods.GetWindowRectangle(EmulatorWindowClassName, EmulatorWindowWindowName);
-            if (rect.IsEmpty)
-                throw new ManipulationFailedException("Failed to get emulator window rectangle");
 
-            var emulatorScaleRatio = EstimateScaleRatio(rect);
-
-            var screenRect = NativeMethods.GetDesktopRectangle();
             var hostPoints = from p in points
-                             select new Point()
-                                        {
-                                            X = (int)(VirtualScreenWidth * (rect.X + emulatorScaleRatio * p.X) / screenRect.Width),
-                                            Y = (int)(VirtualScreenHeight * (rect.Y + emulatorScaleRatio * p.Y) / screenRect.Height)
-                                        };
-
+                             select TranslatePhonePositionToHostPosition(p);
             return hostPoints;
         }
 
@@ -230,6 +249,13 @@ namespace WindowsPhoneTestFramework.EmuDriver
         {
             _inputSimulator.Keyboard.KeyPress(virtualKeyCode);
             Pause(PauseDurationAfterSendingKeyPress);
+        }
+
+        public void SendKeyLongPress(VirtualKeyCode virtualKeyCode) 
+        {
+            _inputSimulator.Keyboard.KeyDown(virtualKeyCode);
+            Pause(LongPressPauseDurationAfterAction);
+            _inputSimulator.Keyboard.KeyUp(virtualKeyCode);         
         }
 
         public void TextEntry(string text)

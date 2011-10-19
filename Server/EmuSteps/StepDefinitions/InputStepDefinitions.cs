@@ -55,6 +55,12 @@ namespace WindowsPhoneTestFramework.EmuSteps.StepDefinitions
             Emu.DisplayInputController.PressHardwareButton(WindowsPhoneHardwareButton.Back);
         }
 
+        [Then(@"I longpress the backbutton")]
+        public void ThenILongPressBack()
+        {
+            Emu.DisplayInputController.LongpressHardwareButton(WindowsPhoneHardwareButton.Back);
+        }
+
         [Then(@"I go home")]
         public void ThenIGoHome()
         {
@@ -69,6 +75,12 @@ namespace WindowsPhoneTestFramework.EmuSteps.StepDefinitions
             Emu.DisplayInputController.PressHardwareButton(parsedButton);
         }
 
+        [Then(@"I click on the middle of the screen")]
+        public void ThenITapOnPosition() 
+        {
+            IGesture gesture = TapGesture.TapOnPosition(240,400);
+            Emu.DisplayInputController.DoGesture(gesture);
+        }
         // /^I click on screen (\d+)% from the left and (\d+)% from the top$/
 
         // /^I press "([^\"]*)"$/
