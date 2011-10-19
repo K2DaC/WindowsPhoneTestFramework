@@ -155,10 +155,10 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("The Pivot Page has a Pivot which responds to swipes")]
-        public virtual void ThePivotPageHasAPivotWhichRespondsToSwipes()
+        [NUnit.Framework.DescriptionAttribute("The Pivot Page has a Pivot which responds to flicks")]
+        public virtual void ThePivotPageHasAPivotWhichRespondsToFlicks()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The Pivot Page has a Pivot which responds to swipes", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("The Pivot Page has a Pivot which responds to flicks", ((string[])(null)));
 #line 39
 this.ScenarioSetup(scenarioInfo);
 #line 40
@@ -168,7 +168,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 42
     testRunner.And("I see \"Input\"");
 #line 45
-    testRunner.Then("I swipe \"RightToLeft\"");
+    testRunner.Then("I flick \"RightToLeft\"");
 #line 46
     testRunner.And("I wait 2 seconds");
 #line 47
@@ -180,7 +180,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 51
     testRunner.And("I see the text \"You are on pivot 2\"");
 #line 53
-    testRunner.Then("I swipe \"RightToLeft\"");
+    testRunner.Then("I flick \"RightToLeft\"");
 #line 54
     testRunner.And("I wait 2 seconds");
 #line 55
@@ -192,7 +192,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 60
     testRunner.And("I see the text \"You are on pivot 3\"");
 #line 61
-    testRunner.Then("I swipe \"LeftToRight\"");
+    testRunner.Then("I flick \"LeftToRight\"");
 #line 62
     testRunner.And("I wait 2 seconds");
 #line 63

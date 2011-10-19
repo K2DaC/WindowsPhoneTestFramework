@@ -18,15 +18,14 @@ Scenario: Fast Application Switching works on Main Page
 	Then take a picture
 	Then I go home
 	Then I wait 1 seconds
-	Then I longpress the backbutton
+	Then I press the back button for 2 seconds
 	Then I wait 1 seconds
-	Then I swipe "LeftToRight"
+	Then I flick "LeftToRight"
 	Then I wait 1 seconds
-	Then I click on the middle of the screen
+	Then I tap on the middle of the screen
 	Then I wait 1 seconds
 	Then take a picture
 	Then my app is running
-
 
 Scenario: Main Page provides a Go button that provides access to the ChildPivotPage
 	Given my app is clean installed and running

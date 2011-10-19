@@ -36,13 +36,13 @@ Scenario: An example broken test
     Then take a picture
     And I see the control "TextBoxOutput" contains "dlroW olleH"
 
-Scenario: The Pivot Page has a Pivot which responds to swipes
+Scenario: The Pivot Page has a Pivot which responds to flicks
     Then I see the control "item1" is left of the control "item2"
     And I see the control "item2" is left of the control "item3"
     And I see "Input"
     #And I don't see "You are on pivot 2"
     #And I don't see "You are on pivot 3"
-    Then I swipe "RightToLeft"
+    Then I flick "RightToLeft"
     And I wait 2 seconds
     And take a picture
     Then I see the control "item2" is left of the control "item3"
@@ -50,7 +50,7 @@ Scenario: The Pivot Page has a Pivot which responds to swipes
     #And I don't see "Input"
     And I see the text "You are on pivot 2"
     #And I don't see "You are on pivot 3"
-    Then I swipe "RightToLeft"
+    Then I flick "RightToLeft"
     And I wait 2 seconds
     And take a picture
     Then I see the control "item3" is left of the control "item1"
@@ -58,7 +58,7 @@ Scenario: The Pivot Page has a Pivot which responds to swipes
     #And I don't see "Input"
     #And I don't see "You are on pivot 2"
     And I see the text "You are on pivot 3"
-    Then I swipe "LeftToRight"
+    Then I flick "LeftToRight"
     And I wait 2 seconds
     And take a picture
     Then I see the control "item2" is left of the control "item3"
