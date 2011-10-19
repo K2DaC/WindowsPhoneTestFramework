@@ -76,12 +76,22 @@ namespace WindowsPhoneTestFramework.EmuSteps.StepDefinitions
         }
 
         [Then(@"I tap on the middle of the screen")]
-        public void ThenITapOnPosition() 
+        public void ThenITapTheCenterOfTheScreen() 
+        {
+            ThenITapOnPercentPosition(50, 50);
+        }
+
+        private static int PercentToPosition(int percentage, int oneHundredPercentValue)
+        {
+            return (int) (percentage*oneHundredPercentValue/100.0);
+        }
+
+        [Then(@"/^I tap on screen (\d+)% from the left and (\d+)% from the top$/")]
+        public void ThenITapOnPercentPosition(int xPercent, int yPercent)
         {
             var orientation = Emu.DisplayInputController.GuessOrientation();
-            var screenMiddle = orientation.ScreenMiddle();
-            IGesture gesture = TapGesture.TapOnPosition(screenMiddle.X, screenMiddle.Y);
-            Emu.DisplayInputController.DoGesture(gesture);
+            var screenSize = orientation.ScreenSize();
+            ThenITapOnPosition(PercentToPosition(xPercent, screenSize.Width), PercentToPosition(yPercent, screenSize.Height));
         }
 
         [Then(@"/^I tap on screen (\d+) from the left and (\d+) from the top$/")]

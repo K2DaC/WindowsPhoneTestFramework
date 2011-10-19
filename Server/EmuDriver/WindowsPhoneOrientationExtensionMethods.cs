@@ -19,14 +19,20 @@ namespace WindowsPhoneTestFramework.EmuDriver
     {
         public static Point ScreenMiddle(this WindowsPhoneOrientation orientation)
         {
+            var size = orientation.ScreenSize();
+            return new Point(size.Width/2, size.Height/2);
+        }
+
+        public static Size ScreenSize(this WindowsPhoneOrientation orientation)
+        {
             switch (orientation)
             {
                 case WindowsPhoneOrientation.Landscape800By480:
-                    return new Point(400,240);
+                    return new Size(800, 480);
 
                 case WindowsPhoneOrientation.Portrait480By800:
-                    return new Point(240,400);
-                    break;
+                    return new Size(480, 800);
+
                 default:
                     throw new ArgumentException("unknown orientation " + orientation);
             }
