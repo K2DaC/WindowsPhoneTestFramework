@@ -64,7 +64,7 @@ namespace WindowsPhoneTestFramework.EmuHost.Commands
             Console.WriteLine("listKeyCodes: Completed");
         }
 
-        enum SwipeDirection
+        enum FlickDirection
         {
             LeftToRight,
             RightToLeft
@@ -79,25 +79,32 @@ namespace WindowsPhoneTestFramework.EmuHost.Commands
         }
 
         [CommandLineCommand("doSwipe")]
-        [Description("completes a mouse swipe across the screen - currently only LeftToRight or RightToLeft across the horizontal and vertical middle of the screen supported - e.g. 'sendSwipe LeftToRight'")]
+        [Description("obsolete - see doFlick instead")]
         public void SendSwipe(string whichSwipe)
+        {
+            Console.WriteLine("doSwipe has been renamed doFlick - try 'doFlick "  + whichSwipe + "'");
+        }
+
+        [CommandLineCommand("doFlick")]
+        [Description("completes a flick gesture across the screen - currently only LeftToRight or RightToLeft across the horizontal and vertical middle of the screen supported - e.g. 'doFlick LeftToRight'")]
+        public void SendFlick(string whichSwipe)
         {
             var orientation = DisplayInputController.GuessOrientation();
 
-            var parsed = (SwipeDirection)Enum.Parse(typeof(SwipeDirection), whichSwipe);
+            var parsed = (FlickDirection)Enum.Parse(typeof(FlickDirection), whichSwipe);
             IGesture gesture = null;
             switch (parsed)
             {
-                case SwipeDirection.LeftToRight:
+                case FlickDirection.LeftToRight:
                     gesture = orientation == WindowsPhoneOrientation.Portrait480By800
-                                  ? SwipeGesture.LeftToRightPortrait()
-                                  : SwipeGesture.LeftToRightLandscape();
+                                  ? FlickGesture.LeftToRightPortrait()
+                                  : FlickGesture.LeftToRightLandscape();
                     break;
 
-                case SwipeDirection.RightToLeft:
+                case FlickDirection.RightToLeft:
                     gesture = orientation == WindowsPhoneOrientation.Portrait480By800
-                                  ? SwipeGesture.RightToLeftPortrait()
-                                  : SwipeGesture.RightToLeftLandscape();
+                                  ? FlickGesture.RightToLeftPortrait()
+                                  : FlickGesture.RightToLeftLandscape();
                     break;
 
                 default:
@@ -105,7 +112,7 @@ namespace WindowsPhoneTestFramework.EmuHost.Commands
             }
 
             DisplayInputController.DoGesture(gesture);
-            Console.WriteLine("doSwipe: Completed");
+            Console.WriteLine("doFlick: Completed");
         }        
     }
 }
