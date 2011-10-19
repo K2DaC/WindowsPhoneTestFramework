@@ -9,12 +9,15 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 // ------------------------------------------------------------------------
 
+using System.Runtime.Serialization;
 using WindowsPhoneTestFramework.AutomationController.Interfaces;
 
 namespace WindowsPhoneTestFramework.AutomationController.Commands
 {
+    [DataContract]
     public class SetTextCommand : AutomationElementCommandBase
     {
+        [DataMember]
         public string Text { get; set; }
     }
 }

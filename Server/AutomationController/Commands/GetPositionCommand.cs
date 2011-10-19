@@ -9,10 +9,14 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 // ------------------------------------------------------------------------
 
+using System.Runtime.Serialization;
+
 namespace WindowsPhoneTestFramework.AutomationController.Commands
 {
+    [DataContract]
     public class GetPositionCommand : AutomationElementCommandBase
     {
+        [DataMember]
         public bool ReturnEmptyIfNotVisible { get; set; }
 
         public GetPositionCommand()

@@ -11,9 +11,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 using System.Text;
 using System.Threading;
 using WindowsPhoneTestFramework.AutomationController.Commands;
@@ -24,7 +26,7 @@ using WindowsPhoneTestFramework.Utils;
 
 namespace WindowsPhoneTestFramework.AutomationController.Service
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, IncludeExceptionDetailInFaults = true)]
     public class PhoneAutomationService : TraceBase, IPhoneAutomationService, IPhoneAutomationServiceControl, IDisposable
     {
         private enum State
@@ -119,6 +121,7 @@ namespace WindowsPhoneTestFramework.AutomationController.Service
 
         public CommandBase GetNextCommand(int timeoutInMilliseconds)
         {
+
             if (_commandAvailableEvent.WaitOne(timeoutInMilliseconds))
             {
                 lock (this)

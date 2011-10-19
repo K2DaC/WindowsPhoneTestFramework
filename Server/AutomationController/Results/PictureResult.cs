@@ -10,11 +10,14 @@
 // ------------------------------------------------------------------------
 
 using System;
+using System.Runtime.Serialization;
 
 namespace WindowsPhoneTestFramework.AutomationController.Results
 {
+    [DataContract]
     public class PictureResult : ResultBase
     {
+        [DataMember]        
         public string EncodedPictureBytes { get; set; }
 
         public PictureResult()

@@ -96,14 +96,6 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="NullCommand" nillable="true" type="tns:NullCommand" />
-  <xs:complexType name="SetFocusCommand">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:AutomationElementCommandBase">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="SetFocusCommand" nillable="true" type="tns:SetFocusCommand" />
   <xs:complexType name="InvokeControlTapActionCommand">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:AutomationElementCommandBase">
@@ -112,4 +104,12 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="InvokeControlTapActionCommand" nillable="true" type="tns:InvokeControlTapActionCommand" />
+  <xs:complexType name="SetFocusCommand">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AutomationElementCommandBase">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SetFocusCommand" nillable="true" type="tns:SetFocusCommand" />
 </xs:schema>

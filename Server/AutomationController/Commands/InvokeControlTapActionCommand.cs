@@ -10,10 +10,12 @@
 // ----------------------------------------------------------------------
 
 using System;
+using System.Runtime.Serialization;
 using WindowsPhoneTestFramework.AutomationController.Interfaces;
 
 namespace WindowsPhoneTestFramework.AutomationController.Commands
 {
+    [DataContract]
     public class InvokeControlTapActionCommand : AutomationElementCommandBase
     {
     }

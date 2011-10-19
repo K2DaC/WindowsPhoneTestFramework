@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 using System.Text;
 using WindowsPhoneTestFramework.AutomationController.Commands;
 using WindowsPhoneTestFramework.AutomationController.Results;
@@ -26,13 +27,16 @@ namespace WindowsPhoneTestFramework.AutomationController.Service
     {
         [OperationContract]
         [ServiceKnownType("GetKnownTypes", typeof(KnownTypeProvider))]
+        [WebInvoke(Method = "POST", UriTemplate = "getNextCommand")]
         CommandBase GetNextCommand(int timeoutInMilliseconds);
 
         [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "continueProcessing")]
         bool ContinueProcessing(Guid commandId);
 
         [OperationContract]
         [ServiceKnownType("GetKnownTypes", typeof(KnownTypeProvider))]
+        [WebInvoke(Method = "POST", UriTemplate = "submitResult")]
         void SubmitResult(ResultBase result);
     }
 }

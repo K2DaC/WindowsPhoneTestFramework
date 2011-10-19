@@ -41,7 +41,7 @@
       <wsdl:output wsam:Action="http://tempuri.org/IPhoneAutomationService/SubmitResultResponse" message="tns:IPhoneAutomationService_SubmitResult_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="binding1_IPhoneAutomationService" type="tns:IPhoneAutomationService">
+  <wsdl:binding name="SOAP_IPhoneAutomationService" type="tns:IPhoneAutomationService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetNextCommand">
       <soap:operation soapAction="http://tempuri.org/IPhoneAutomationService/GetNextCommand" style="document" />
@@ -72,7 +72,7 @@
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="PhoneAutomationService">
-    <wsdl:port name="binding1_IPhoneAutomationService" binding="tns:binding1_IPhoneAutomationService">
+    <wsdl:port name="SOAP_IPhoneAutomationService" binding="tns:SOAP_IPhoneAutomationService">
       <soap:address location="http://localhost:8085/phoneAutomation/automate" />
     </wsdl:port>
   </wsdl:service>

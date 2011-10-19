@@ -10,12 +10,16 @@
 // ------------------------------------------------------------------------
 
 using System;
+using System.Runtime.Serialization;
 
 namespace WindowsPhoneTestFramework.AutomationController.Commands
 {
+    [DataContract]
     public class CommandBase
     {
+        [DataMember]
         public Guid Id { get; set; }
+        [DataMember]
         public string Type { get; set; }
 
         public CommandBase()

@@ -10,10 +10,14 @@
 // ------------------------------------------------------------------------
 
 
+using System.Runtime.Serialization;
+
 namespace WindowsPhoneTestFramework.AutomationController.Commands
 {
+    [DataContract]
     public class LookForTextCommand : CommandBase
     {
+        [DataMember]
         public string Text { get; set; }
     }
 }

@@ -10,9 +10,11 @@
 // ------------------------------------------------------------------------
 
 using System;
+using System.Runtime.Serialization;
 
 namespace WindowsPhoneTestFramework.AutomationController.Results
 {
+    [DataContract]
     public class NotFoundFailedResult : FailedResultBase
     {
         public NotFoundFailedResult()

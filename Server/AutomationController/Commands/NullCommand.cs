@@ -10,8 +10,11 @@
 // ------------------------------------------------------------------------
 
 
+using System.Runtime.Serialization;
+
 namespace WindowsPhoneTestFramework.AutomationController.Commands
 {
+    [DataContract]
     public class NullCommand : CommandBase
     {
     }

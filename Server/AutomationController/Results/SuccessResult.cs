@@ -10,15 +10,14 @@
 // ------------------------------------------------------------------------
 
 using System;
+using System.Runtime.Serialization;
 
 namespace WindowsPhoneTestFramework.AutomationController.Results
 {
+    [DataContract]
     public class SuccessResult : ResultBase
     {
+        [DataMember]
         public string ResultText { get; set; }
-
-        public SuccessResult()
-        {
-        }
     }
 }

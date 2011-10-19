@@ -9,17 +9,25 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 // ------------------------------------------------------------------------
 
+using System.Runtime.Serialization;
 using WindowsPhoneTestFramework.AutomationController.Interfaces;
 
 namespace WindowsPhoneTestFramework.AutomationController.Commands
 {
+    [DataContract]
     public class GenericCommand : AutomationElementCommandBase
     {
+        [DataMember]
         public string PleaseDo { get; set; }
+        [DataMember]
         public string Parameter0 { get; set; }
+        [DataMember]
         public string Parameter1 { get; set; }
+        [DataMember]
         public string Parameter2 { get; set; }
+        [DataMember]
         public string Parameter3 { get; set; }
+        [DataMember]
         public string Parameter4 { get; set; }
     }
 }

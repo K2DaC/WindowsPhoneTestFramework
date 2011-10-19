@@ -10,12 +10,16 @@
 // ------------------------------------------------------------------------
 
 using System;
+using System.Runtime.Serialization;
 
 namespace WindowsPhoneTestFramework.AutomationController.Results
 {
+    [DataContract]
     public class ExceptionFailedResult : FailedResultBase
     {
+        [DataMember]
         public string ExceptionType { get; set; }
+        [DataMember]
         public string ExceptionMessage { get; set; }
     }
 }

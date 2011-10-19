@@ -9,10 +9,12 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 // ------------------------------------------------------------------------
 
+using System.Runtime.Serialization;
 using WindowsPhoneTestFramework.AutomationController.Interfaces;
 
 namespace WindowsPhoneTestFramework.AutomationController.Commands
 {
+    [DataContract]
     public class SetFocusCommand : AutomationElementCommandBase
     {
     }

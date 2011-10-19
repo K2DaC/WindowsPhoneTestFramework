@@ -10,9 +10,7 @@
 // ------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ServiceModel.Web;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -24,13 +22,12 @@ namespace WindowsPhoneTestFramework.AutomationController
 {
     public class ServiceHostController : TraceBase, IDisposable
     {
+        public static readonly Uri DefaultBindingAddress = new Uri("http://localhost:8085/phoneAutomation");
+
         private ServiceHost _serviceHost;
         private IPhoneAutomationController _automationController;
 
-        public static readonly Uri DefaultBindingAddress = new Uri("http://localhost:8085/phoneAutomation");
-
         public Uri BindingAddress { get; set; }
-
         public AutomationIdentification AutomationIdentification { get; set; }
 
         public IPhoneAutomationController Controller
@@ -74,21 +71,39 @@ namespace WindowsPhoneTestFramework.AutomationController
 
             InvokeTrace("building host...");
 
+            // build the service
             var phoneAutomationService = new PhoneAutomationService();
             phoneAutomationService.Trace += (sender, args) => InvokeTrace(args);
             var serviceHost = new ServiceHost(phoneAutomationService, BindingAddress);
 
-            // Configure HTTP binding (needed for long messages)
-            serviceHost.AddServiceEndpoint(typeof(IPhoneAutomationService), GetHttpBinding(), BindingAddress + "/automate");
-
-            // Enable metadata publishing.
+            // Enable metadata publishing
             var smb = new ServiceMetadataBehavior
-                          {
-                              HttpGetEnabled = true,
-                              MetadataExporter = { PolicyVersion = PolicyVersion.Policy15 }
-                          };
+            {
+                HttpGetEnabled = true,
+                MetadataExporter = { PolicyVersion = PolicyVersion.Policy15 }
+            };
             serviceHost.Description.Behaviors.Add(smb);
 
+            // build SOAP ServiceEndpoint
+            serviceHost.AddServiceEndpoint(
+                                            typeof(IPhoneAutomationService),
+                                            GetHttpBinding(),
+                                            BindingAddress + "/automate");
+
+            // build JSON ServiceEndpoint
+            var jsonServiceEndpoint = serviceHost.AddServiceEndpoint(
+                                                        typeof(IPhoneAutomationService),
+                                                        GetWebHttpBinding(),
+                                                        BindingAddress + "/jsonAutomate");
+            var webHttpBehavior = new WebHttpBehavior()
+                                      {
+                                          DefaultOutgoingRequestFormat = WebMessageFormat.Json,
+                                          DefaultOutgoingResponseFormat = WebMessageFormat.Json,
+                                          DefaultBodyStyle = WebMessageBodyStyle.Wrapped
+                                      };
+            jsonServiceEndpoint.Behaviors.Add(webHttpBehavior);
+
+            // open the host
             InvokeTrace("opening host...");
             serviceHost.Open();
             InvokeTrace("host open");
@@ -111,14 +126,28 @@ namespace WindowsPhoneTestFramework.AutomationController
 
         private static Binding GetHttpBinding()
         {
-            var binding = new BasicHttpBinding
+            var binding = new BasicHttpBinding()
             {
-                Name = "binding1",
+                Name = "SOAP",
                 MaxReceivedMessageSize = 1000000,
                 MaxBufferSize = 1000000,
                 ReaderQuotas = { MaxStringContentLength = 1000000 },
                 HostNameComparisonMode = HostNameComparisonMode.StrongWildcard,
                 Security = { Mode = BasicHttpSecurityMode.None }
+            };
+            return binding;
+        }
+
+        private static Binding GetWebHttpBinding()
+        {
+            var binding = new WebHttpBinding()
+            {
+                Name = "JSON",
+                MaxReceivedMessageSize = 1000000,
+                MaxBufferSize = 1000000,
+                ReaderQuotas = { MaxStringContentLength = 1000000 },
+                HostNameComparisonMode = HostNameComparisonMode.StrongWildcard,
+                Security = { Mode = WebHttpSecurityMode.None }
             };
             return binding;
         }

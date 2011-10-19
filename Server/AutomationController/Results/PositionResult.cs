@@ -10,18 +10,20 @@
 // ------------------------------------------------------------------------
 
 using System;
+using System.Runtime.Serialization;
 
 namespace WindowsPhoneTestFramework.AutomationController.Results
 {
+    [DataContract]
     public class PositionResult : ResultBase
     {
+        [DataMember]
         public double Left { get; set; }
+        [DataMember]
         public double Top { get; set; }
+        [DataMember]
         public double Width { get; set; }
+        [DataMember]
         public double Height { get; set; }
-
-        public PositionResult()
-        {
-        }
     }
 }

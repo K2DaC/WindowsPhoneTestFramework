@@ -25,8 +25,8 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.GenericCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.SetTextCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.TakePictureCommand))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.SetFocusCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.InvokeControlTapActionCommand))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.SetFocusCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.LookForTextCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.ConfirmAliveCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.NullCommand))]
@@ -81,8 +81,8 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.GenericCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.SetTextCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.TakePictureCommand))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.SetFocusCommand))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.InvokeControlTapActionCommand))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WindowsPhoneTestFramework.AutomationClient.Remote.SetFocusCommand))]
     public partial class AutomationElementCommandBase : WindowsPhoneTestFramework.AutomationClient.Remote.CommandBase {
         
         private WindowsPhoneTestFramework.AutomationClient.Remote.AutomationIdentifier AutomationIdentifierField;
@@ -258,16 +258,16 @@ namespace WindowsPhoneTestFramework.AutomationClient.Remote {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SetFocusCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
+    [System.Runtime.Serialization.DataContractAttribute(Name="InvokeControlTapActionCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
         "oller.Commands")]
-    public partial class SetFocusCommand : WindowsPhoneTestFramework.AutomationClient.Remote.AutomationElementCommandBase {
+    public partial class InvokeControlTapActionCommand : WindowsPhoneTestFramework.AutomationClient.Remote.AutomationElementCommandBase {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="InvokeControlTapActionCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
+    [System.Runtime.Serialization.DataContractAttribute(Name="SetFocusCommand", Namespace="http://schemas.datacontract.org/2004/07/WindowsPhoneTestFramework.AutomationContr" +
         "oller.Commands")]
-    public partial class InvokeControlTapActionCommand : WindowsPhoneTestFramework.AutomationClient.Remote.AutomationElementCommandBase {
+    public partial class SetFocusCommand : WindowsPhoneTestFramework.AutomationClient.Remote.AutomationElementCommandBase {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

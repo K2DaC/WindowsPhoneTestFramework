@@ -10,11 +10,14 @@
 // ------------------------------------------------------------------------
 
 using System;
+using System.Runtime.Serialization;
 
 namespace WindowsPhoneTestFramework.AutomationController.Results
 {
+    [DataContract]
     public class FailedResultBase : ResultBase
     {
+        [DataMember]        
         public string FailureText { get; set; }
     }
 }
