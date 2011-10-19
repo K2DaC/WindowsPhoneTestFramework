@@ -9,6 +9,7 @@
 // Author - Stuart Lodge, Cirrious. http://www.cirrious.com
 // ------------------------------------------------------------------------
 
+using System;
 using WindowsInput.Native;
 using WindowsPhoneTestFramework.Utils;
 
@@ -22,9 +23,11 @@ namespace WindowsPhoneTestFramework.EmuDriver
         void EnsureHardwareKeyboardDisabled();
         WindowsPhoneOrientation GuessOrientation();
         void PressHardwareButton(WindowsPhoneHardwareButton whichHardwareButton);
-        void LongpressHardwareButton(WindowsPhoneHardwareButton whichHardwareButton);
+        void LongPressHardwareButton(WindowsPhoneHardwareButton whichHardwareButton);
+        void LongPressHardwareButton(WindowsPhoneHardwareButton whichHardwareButton, TimeSpan duration);
         void DoGesture(IGesture gesture);
         void SendKeyPress(VirtualKeyCode hardwareButtonToKeyCode);
+        void SendKeyLongPress(VirtualKeyCode virtualKeyCode, TimeSpan duration);
         void TextEntry(string text);
     }
 }

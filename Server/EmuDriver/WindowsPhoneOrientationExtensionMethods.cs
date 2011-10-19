@@ -17,6 +17,21 @@ namespace WindowsPhoneTestFramework.EmuDriver
     // this might be a bad name - really this contains a RectangleF extension method
     public static class WindowsPhoneOrientationExtensionMethods
     {
+        public static Point ScreenMiddle(this WindowsPhoneOrientation orientation)
+        {
+            switch (orientation)
+            {
+                case WindowsPhoneOrientation.Landscape800By480:
+                    return new Point(400,240);
+
+                case WindowsPhoneOrientation.Portrait480By800:
+                    return new Point(240,400);
+                    break;
+                default:
+                    throw new ArgumentException("unknown orientation " + orientation);
+            }
+        }
+
         public static bool IsVisible(this RectangleF position, WindowsPhoneOrientation orientation)
         {
             if (position.IsEmpty)

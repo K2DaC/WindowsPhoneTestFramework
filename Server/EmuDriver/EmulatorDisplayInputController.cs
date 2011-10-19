@@ -28,8 +28,7 @@ namespace WindowsPhoneTestFramework.EmuDriver
 
         // pauses
         private static readonly TimeSpan DefaultPauseDurationAfterAction = TimeSpan.FromMilliseconds(100.0);
-        private static readonly TimeSpan LongPressPauseDurationAfterAction = TimeSpan.FromMilliseconds(2000.0);
-        private static readonly TimeSpan DefaultTapDuration = TimeSpan.FromMilliseconds(500.0);
+        private static readonly TimeSpan DefaultLongPressPauseDurationDuringAction = TimeSpan.FromMilliseconds(2000.0);
         public TimeSpan PauseDurationAfterSendingKeyPress { get; set; }
         public TimeSpan PauseDurationAfterSettingForegroundWindow { get; set; }
         public TimeSpan PauseDurationAfterPerformingGesture { get; set; }
@@ -111,9 +110,14 @@ namespace WindowsPhoneTestFramework.EmuDriver
             SendKeyPress(HardwareButtonToKeyCode(whichHardwareButton));
         }
 
-        public void LongpressHardwareButton(WindowsPhoneHardwareButton whichHardwareButton) 
+        public void LongPressHardwareButton(WindowsPhoneHardwareButton whichHardwareButton)
         {
-            SendKeyLongPress(HardwareButtonToKeyCode(whichHardwareButton));
+            LongPressHardwareButton(whichHardwareButton, DefaultLongPressPauseDurationDuringAction);
+        }
+
+        public void LongPressHardwareButton(WindowsPhoneHardwareButton whichHardwareButton, TimeSpan pressDuration)
+        {
+            SendKeyLongPress(HardwareButtonToKeyCode(whichHardwareButton), pressDuration);
         }
 
         public void DoGesture(IGesture gesture)
@@ -121,16 +125,6 @@ namespace WindowsPhoneTestFramework.EmuDriver
             gesture.Perform(this);
             Pause(PauseDurationAfterPerformingGesture);
         }
-
-        public void PerformMouseDownUp(Point point) 
-        {
-            _inputSimulator.Mouse.MoveMouseTo(point.X, point.Y);
-            _inputSimulator.Mouse.LeftButtonDown();
-            Pause(DefaultTapDuration);
-            _inputSimulator.Mouse.LeftButtonUp();
-        }
-
-        
 
         public void PerformMouseDownMoveUp(IEnumerable<Point> points, TimeSpan periodBetweenPoints)
         {
@@ -143,16 +137,20 @@ namespace WindowsPhoneTestFramework.EmuDriver
             // mouse down at the start point
             var startPoint = array.First();
             _inputSimulator.Mouse.MoveMouseTo(startPoint.X, startPoint.Y);
+            var lastMovedToPoint = startPoint;
             _inputSimulator.Mouse.LeftButtonDown();
 
             foreach (var point in array.Skip(1).Take(array.Length - 2))
             {
                 _inputSimulator.Mouse.MoveMouseTo(point.X, point.Y);
+                lastMovedToPoint = point;
                 Pause(periodBetweenPoints);
             }
 
             var endPoint = array.Last();
-            _inputSimulator.Mouse.MoveMouseTo(endPoint.X, endPoint.Y);
+            if (lastMovedToPoint.X != endPoint.X || lastMovedToPoint.Y != endPoint.Y)
+                _inputSimulator.Mouse.MoveMouseTo(endPoint.X, endPoint.Y);
+
             _inputSimulator.Mouse.LeftButtonUp();
         }
 
@@ -251,11 +249,12 @@ namespace WindowsPhoneTestFramework.EmuDriver
             Pause(PauseDurationAfterSendingKeyPress);
         }
 
-        public void SendKeyLongPress(VirtualKeyCode virtualKeyCode) 
+        public void SendKeyLongPress(VirtualKeyCode virtualKeyCode, TimeSpan duration)
         {
             _inputSimulator.Keyboard.KeyDown(virtualKeyCode);
-            Pause(LongPressPauseDurationAfterAction);
-            _inputSimulator.Keyboard.KeyUp(virtualKeyCode);         
+            Pause(duration);
+            _inputSimulator.Keyboard.KeyUp(virtualKeyCode);
+            Pause(PauseDurationAfterSendingKeyPress);
         }
 
         public void TextEntry(string text)
