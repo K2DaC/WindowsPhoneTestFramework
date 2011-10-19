@@ -54,6 +54,7 @@
     <Compile Include="InstallationResult.cs" />
     <Compile Include="StartResult.cs" />
     <Compile Include="StopResult.cs" />
+    <Compile Include="TapGesture.cs" />
     <Compile Include="UninstallationResult.cs" />
     <Compile Include="WindowsPhoneDriver.cs" />
     <Compile Include="DriverBase.cs" />

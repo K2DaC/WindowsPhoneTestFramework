@@ -22,6 +22,7 @@ namespace WindowsPhoneTestFramework.EmuDriver
         void EnsureHardwareKeyboardDisabled();
         WindowsPhoneOrientation GuessOrientation();
         void PressHardwareButton(WindowsPhoneHardwareButton whichHardwareButton);
+        void LongpressHardwareButton(WindowsPhoneHardwareButton whichHardwareButton);
         void DoGesture(IGesture gesture);
         void SendKeyPress(VirtualKeyCode hardwareButtonToKeyCode);
         void TextEntry(string text);

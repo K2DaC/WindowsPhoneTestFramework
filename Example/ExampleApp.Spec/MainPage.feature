@@ -10,6 +10,24 @@ Scenario: Main Page loads after a few seconds
 	Then I wait for the text "Go!" to appear
 	Then take a picture
 
+Scenario: Fast Application Switching works on Main Page
+	Given my app is clean installed and running
+	Then take a picture
+	Then I may see the text "Waiting..."
+	Then I wait for the text "Go!" to appear
+	Then take a picture
+	Then I go home
+	Then I wait 1 seconds
+	Then I longpress the backbutton
+	Then I wait 1 seconds
+	Then I swipe "LeftToRight"
+	Then I wait 1 seconds
+	Then I click on the middle of the screen
+	Then I wait 1 seconds
+	Then take a picture
+	Then my app is running
+
+
 Scenario: Main Page provides a Go button that provides access to the ChildPivotPage
 	Given my app is clean installed and running
 	Then take a picture
