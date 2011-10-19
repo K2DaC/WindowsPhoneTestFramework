@@ -10,6 +10,8 @@
 // ------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace WindowsPhoneTestFramework.EmuDriver
 {
@@ -23,5 +25,25 @@ namespace WindowsPhoneTestFramework.EmuDriver
             NumberOfIntermediatePoints = 10;
             PeriodBetweenPoints = TimeSpan.FromMilliseconds(20.0);
         }
+
+        public override void Perform(EmulatorDisplayInputController emulatorDisplayInputController)
+        {
+            var screenPoints = GetScreenPoints();
+            if (screenPoints != null)
+                PerformScreenPoints(emulatorDisplayInputController, screenPoints);
+        }
+
+        private void PerformScreenPoints(EmulatorDisplayInputController emulatorDisplayInputController, IEnumerable<Point> points)
+        {
+            var translatedPoints = emulatorDisplayInputController.TranslatePhonePositionsToHostPositions(points);
+            PerformTranslatedPoints(emulatorDisplayInputController, translatedPoints);
+        }
+
+        private void PerformTranslatedPoints(EmulatorDisplayInputController emulatorDisplayInputController, IEnumerable<Point> translatedPoints)
+        {
+            emulatorDisplayInputController.PerformMouseDownMoveUp(translatedPoints, PeriodBetweenPoints);
+        }
+
+        protected abstract IEnumerable<Point> GetScreenPoints();
     }
 }

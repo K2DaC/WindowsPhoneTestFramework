@@ -66,7 +66,7 @@
     <Compile Include="MultipointGestureBase.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SwipeGesture.cs" />
+    <Compile Include="FlickGesture.cs" />
     <Compile Include="WindowsPhoneHardwareButton.cs" />
     <Compile Include="WindowsPhoneOrientation.cs" />
     <Compile Include="WindowsPhoneOrientationExtensionMethods.cs" />

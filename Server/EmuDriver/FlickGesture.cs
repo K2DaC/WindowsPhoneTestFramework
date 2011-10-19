@@ -1,5 +1,5 @@
 ﻿// ----------------------------------------------------------------------
-// <copyright file="SwipeGesture.cs" company="Expensify">
+// <copyright file="FlickGesture.cs" company="Expensify">
 //     (c) Copyright Expensify. http://www.expensify.com
 //     This source is subject to the Microsoft Public License (Ms-PL)
 //     Please see license.txt on https://github.com/Expensify/WindowsPhoneTestFramework
@@ -14,16 +14,16 @@ using System.Drawing;
 
 namespace WindowsPhoneTestFramework.EmuDriver
 {
-    public class SwipeGesture : MultipointGestureBase
+    public class FlickGesture : MultipointGestureBase
     {
         public Point SwipeStartPosition { get; set; }
         public Point SwipeEndPosition { get; set; }
 
-        public SwipeGesture()
+        public FlickGesture()
         {
             // default is a horizontal left to right swipe at height 100
             SwipeStartPosition = new Point(100, 100);
-            SwipeStartPosition = new Point(400, 100);
+            SwipeEndPosition = new Point(400, 100);
         }
 
         public void ReverseDirection()
@@ -33,46 +33,39 @@ namespace WindowsPhoneTestFramework.EmuDriver
             SwipeEndPosition = oldStart;
         }
 
-        public static SwipeGesture LeftToRightPortrait(int height = 400)
+        public static FlickGesture LeftToRightPortrait(int height = 400)
         {
-            return new SwipeGesture()
+            return new FlickGesture()
                        {
                            SwipeStartPosition = new Point(120, height),
                            SwipeEndPosition = new Point(360, height)
                        };
         }
 
-        public static SwipeGesture LeftToRightLandscape(int height = 240)
+        public static FlickGesture LeftToRightLandscape(int height = 240)
         {
-            return new SwipeGesture()
+            return new FlickGesture()
                        {
                            SwipeStartPosition = new Point(200, height),
                            SwipeEndPosition = new Point(400, height)
                        };
         }
 
-        public static SwipeGesture RightToLeftPortrait(int height = 400)
+        public static FlickGesture RightToLeftPortrait(int height = 400)
         {
             var toReturn = LeftToRightPortrait(height);
             toReturn.ReverseDirection();
             return toReturn;
         }
 
-        public static SwipeGesture RightToLeftLandscape(int height = 240)
+        public static FlickGesture RightToLeftLandscape(int height = 240)
         {
             var toReturn = LeftToRightLandscape(height);
             toReturn.ReverseDirection();
             return toReturn;
         }
 
-        public override void Perform(EmulatorDisplayInputController emulatorDisplayInputController)
-        {
-            var points = GeneratePoints();
-            points = emulatorDisplayInputController.TranslatePhonePositionsToHostPositions(points);
-            emulatorDisplayInputController.PerformMouseDownMoveUp(points, base.PeriodBetweenPoints);
-        }
-
-        private IEnumerable<Point> GeneratePoints()
+        protected override IEnumerable<Point> GetScreenPoints()
         {
             var list = new List<Point>();
 
