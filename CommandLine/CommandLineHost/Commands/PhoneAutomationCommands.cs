@@ -36,7 +36,7 @@ namespace WindowsPhoneTestFramework.CommandLineHost.Commands
         public void InvokeTap(string whatToClick)
         {
             var result = PhoneAutomationController.InvokeControlTapAction(whatToClick);
-            Console.WriteLine("Click:" + result.ToString());
+            Console.WriteLine("invokeTap:" + result.ToString());
         }
 
         [CommandLineCommand("ping")]
